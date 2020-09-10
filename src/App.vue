@@ -3,9 +3,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div v-if="logged_in">
       <top-bar :user="user"></top-bar>
-      <router-view></router-view>
+      <router-view/>
       <ul class="floating-menu floating-right floating-top">
-        <li><a href="{% url 'logout' %}">logout</a></li>
+        <li><a @click="logged_in=false">logout</a></li>
       </ul>
     </div>
     <div v-else>
