@@ -2,14 +2,14 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <resto-person v-for="x in 5" :serveur="serveurs[0]"/>
+      <resto-person v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
       <!-- <resto-person v-for="serveur in serveurs" :serveur="serveur"/> -->
     </div>
   </div>
 </template>
 
 <script>
-import EVENT_BUS from "../main";
+import { EVENT_BUS } from "../main";
 import searchbar from "../components/search";
 import person from "../components/person";
 
@@ -20,9 +20,7 @@ export default {
   },
   data () {
     return{
-      serveurs: [
-        {avatar:"", firstname:"firstname", lastname:"lastname", tel:'0000000'}
-      ],
+      serveurs: EVENT_BUS.serveurs,
     }
   },
   methods: {

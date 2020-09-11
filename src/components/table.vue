@@ -16,14 +16,8 @@
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		id_table: { 
-			type : Number,
-			required:true
-		},
-		number: { 
-			type : Number,
-			required:true
-		}
+		id_table: { type : String, required:true},
+		number: { type : Number, required:true}
 	},
 };
 </script>

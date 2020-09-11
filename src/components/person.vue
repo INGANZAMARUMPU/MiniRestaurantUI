@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-link >
+		<router-link :to="{name:'menus', params:{id_table:id_table, id_serveur:serveur.id}}">
 		<div class="user-card">
 			<div class="img-user">
 				<img :src='serveur.avatar' alt="">
@@ -19,14 +19,8 @@
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		serveur: { 
-			type : Object,
-			required:true
-		},
-		id_table: { 
-			type : Number,
-			required:true
-		}
+		serveur: { type : Object, required:true},
+		id_table: { type : String, required:true}
 	},
 };
 </script>

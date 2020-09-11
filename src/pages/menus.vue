@@ -2,24 +2,24 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <resto-table v-for="x in (1,5)" :id_table="'x'" :number="x"/>
+      <resto-menu v-for="recette in recettes" :recette="recette"/>
     </div>
   </div>
 </template>
 
 <script>
-import EVENT_BUS from "../main";
+import { EVENT_BUS } from "../main";
 import searchbar from "../components/search";
-import table from "../components/table";
+import menu from "../components/menu";
 
 export default {
   components:{
     searchBar: searchbar,
-    restoTable:table
+    restoMenu:menu
   },
   data () {
     return{
-      
+      recettes: EVENT_BUS.recettes,
     }
   },
   methods: {
