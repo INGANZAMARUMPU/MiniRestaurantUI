@@ -1,19 +1,15 @@
 <template>
-	<div>
-		<router-link :to="{name:'menus', params:{id_table:id_table, id_serveur:serveur.id}}">
-		<div class="user-card">
-			<div class="img-user">
-				<img :src='serveur.avatar' alt="">
-			</div>
-			<div class="username">
-				<div><h3>{{ serveur.tel }}</h3></div>
-				<div>
-					{{ serveur.firstname }} {{ serveur.lastname }}
-				</div>
-			</div>
+	<router-link :to="{name:'menus', params:{id_table:id_table, id_serveur:serveur.id}}" class="user-card">
+		<div class="img-user">
+			<img :src='serveur.avatar' alt="">
 		</div>
-		</router-link>
+		<div class="username">
+			<div><h3>{{ serveur.tel }}</h3></div>
+			<div>
+				{{ serveur.firstname }} {{ serveur.lastname }}
+			</div>
 	</div>
+	</router-link>
 </template>
 <script >
 import EVENT_BUS from '../main'

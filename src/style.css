@@ -103,7 +103,7 @@ ul{
 	border-radius: 50%;
 	background-color: #ddd;
 	overflow: hidden;
-	margin: 5px;
+	margin: auto;
 }
 .img-user img{
 	width: 100%;
@@ -216,7 +216,7 @@ li{
 	list-style-type: none;
 	width: 100%;
 	display: block;
-	text-align: start;
+	text-align: center;
 }
 .submenu a{
 	font-size: .8em;
@@ -425,6 +425,9 @@ td{
 		position: inherit!important;
 		text-align: center!important;
 	}
+	.floating-menu li{
+		width: 100%;
+	}
 	.scrollable-tab{
 		position: inherit;
 		height: auto;
@@ -444,5 +447,12 @@ td{
 	}
 	.date-form label{
 		color: black;
+	}
+	.recycler{
+		display: inline;
+		margin: auto;
+	}
+	.basic-card, .user-card{
+		display: inline-block;
 	}
 }

@@ -2,7 +2,7 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <resto-table v-for="x in (1,5)" :id_table="'x'" :number="x"/>
+      <resto-table v-for="x in (1,5)" :id_table="String(x)" :number="x"/>
     </div>
   </div>
 </template>
