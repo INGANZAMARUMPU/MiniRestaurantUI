@@ -48,10 +48,10 @@ export default {
       {id:"4", avatar:"/img/ic_user.png", firstname:"quatrieme", lastname:"quatre", tel:'333333'}
     ];
     EVENT_BUS.recettes = [
-      {id:"1", image:"/img/recette.png", nom:"premier", prix:"1 000"},
-      {id:"2", image:"/img/recette.png", nom:"second", prix:"2 000"},
-      {id:"3", image:"/img/recette.png", nom:"troisieme", prix:"3 000"},
-      {id:"4", image:"/img/recette.png", nom:"quatrieme", prix:"4 000"}
+      {id:"1", image:"/img/recette.png", nom:"premier", prix:1000},
+      {id:"2", image:"/img/recette.png", nom:"second", prix:2000},
+      {id:"3", image:"/img/recette.png", nom:"troisieme", prix:3000},
+      {id:"4", image:"/img/recette.png", nom:"quatrieme", prix:4000}
     ];
   }
 };

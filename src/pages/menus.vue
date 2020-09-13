@@ -2,12 +2,14 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <resto-menu v-for="recette in recettes" :recette="recette" @item_add="addToCart" />
+      <resto-menu v-for="recette in recettes" :recette="recette" @item_add="addToCart"/>
     </div>
     <ul class="floating-menu floating-left floating-top">
-      <li><a href="#" id="toggle-panier">panier ({{cart.length}}) </a></li>
+      <li><a href="#" id="toggle-panier" @click="popover_opened=true">
+        panier ({{cart.length}})
+      </a></li>
     </ul>
-    <cart-popover></cart-popover>
+    <cart-popover :visible='popover_opened' :cart='cart' @item_add="addToCart"/>
   </div>
 </template>
 
@@ -26,7 +28,8 @@ export default {
   data () {
     return{
       recettes: EVENT_BUS.recettes,
-      cart:[]
+      cart:[],
+      popover_opened:false
     }
   },
   methods: {
