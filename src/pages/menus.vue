@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" @click="popover_opened=false">
     <search-bar/>
     <div class="recycler">
-      <resto-menu v-for="recette in recettes" :recette="recette" @item_add="addToCart"/>
+      <resto-menu v-for="recette in recettes" :recette="recette" @item_add="addToCart" :quantite="getCartQuantite(recette)"/>
     </div>
     <ul class="floating-menu floating-left floating-top">
-      <li><a href="#" id="toggle-panier" @click="popover_opened=true">
+      <li><a href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
         panier ({{cart.length}})
       </a></li>
     </ul>
@@ -53,6 +53,17 @@ export default {
         }
       }
       return -1;
+    },
+    getCartQuantite(recette){
+      let position = this.findPositionInCart(recette.id);
+      if(position>=0){
+        return this.cart[position].quantite;
+      }
+      return 0;
+    },
+    changeCart(cart){
+      this.popover_opened = false;
+      this.cart = cart;
     }
   }
 };

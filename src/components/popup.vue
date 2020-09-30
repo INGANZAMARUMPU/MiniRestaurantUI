@@ -1,5 +1,5 @@
 <template>
-	<div id="panier" :class="{popup:true, active:status}"  @click="visible=false">
+	<div id="panier" :class="{popup:true, active:visible}"  @click="visible=false">
 		<div class="popup-body" @click.prevent.stop>
 			<table class="table panier">
 				<caption class="header-panier">Panier</caption>
@@ -65,12 +65,12 @@ export default {
 			}
 		}
 	},
-	computed:{
-		status:function(){
+	watch:{
+		cart:function(value){
 			if(this.cart.length < 1){
-				this.visible=false;
+				console.log('cart empty')
+				this.$emit("edition_done", this.cart);
 			}
-			return this.visible
 		}
 	}
 };
