@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ul class="top-menu"> <!--floating-right-center">-->
+		<ul>
 			<li class="toggle-submenu">
 				<router-link :to="{name:'tables'}">Tables</router-link>
 			</li>
@@ -8,14 +8,16 @@
 			<li class="toggle-submenu">
 				<router-link to="">Stock</router-link>
 			</li>
-			<li class="toggle-submenu" v-if="user.is_staff">
+			<li v-if="user.is_staff" @mouseenter="e => showSubmenu(e)"
+				@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Courbes</router-link>
 				<div class="submenu">
 					<router-link to="">Menu</router-link>
 					<router-link to="">Serveurs</router-link>
 				</div>
 			</li>
-			<li class="toggle-submenu" v-if="user.is_staff">
+			<li v-if="user.is_staff" @mouseenter="e => showSubmenu(e)"
+				@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Gestion</router-link>
 				<div class="submenu">
 				   <a target="blank" href="#">Tables</a>
@@ -37,8 +39,51 @@ export default {
 			type:Object,
 			required:true
 		}
+	},
+	methods:{
+		showSubmenu(event){
+			let item = event.target.getElementsByClassName("submenu")[0];
+			item.style.display = 'block';
+		},
+		hideSubmenu(event){
+			let item = event.target.getElementsByClassName("submenu")[0];
+			item.style.display = 'none';
+		}
 	}
 };
 </script>
 <style scoped>
+a{
+	color: white;
+}
+ul{
+	background-color: #007799;
+	font-size: 14pt;
+	display: flex;
+}
+li{
+	padding: 5px 0;
+	list-style-type: none;
+	flex-grow: 1;
+	text-align: center;
+	position: relative;
+}
+.submenu{
+	display: none;
+	position: absolute;
+	background-color: #007799;
+	right: 0;
+}
+.submenu a{
+	display: block;
+	padding: 3px 5px;
+}
+.submenu a:hover, li:hover{
+	background-color: #0088aa;
+}
+@media screen and (max-width: 650px){
+	ul{
+		display: block;
+	}
+}
 </style>
