@@ -33,6 +33,7 @@ export default {
 }
 .title{
 	font-size: 1.3em;
+	padding-bottom: 5px;
 	border-bottom: 1px solid lightgray;
 }
 .buttons{
@@ -44,9 +45,6 @@ export default {
 	text-align: center;
 }
 .buttons *:hover{
-	width: 50%;
-	padding: 3px;
-	text-align: center;
 	background-color: #007799;
 }
 .buttons *:last-child{

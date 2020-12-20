@@ -23,7 +23,7 @@ body,#body {
 input[type=text], input[type=password]{
 	padding: 7px;
 	font-size: 12pt;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 input[type=submit], button{
 	padding: 8px 15px;
@@ -45,5 +45,6 @@ input[type=submit], button{
   display: flex;
   flex-wrap: wrap;
 }
+button:focus {outline:0;}
 @media screen and (max-width: 650px){
 }

@@ -1,9 +1,9 @@
 <template>
-	<div class="basic-card bg-blue recette" :data-id='recette.id'>
+	<div class="parent" :data-id='recette.id'>
 		<div class="img food-img">
 			<img :src="recette.image"/>
 		</div>
-		<div class="subtitle">
+		<div class="title">
 			<span class="name">{{ recette.nom }}</span>
 			<span class="prix">{{ recette.prix }}</span>
 			Fbu
@@ -47,4 +47,41 @@ export default {
 };
 </script>
 <style scoped>
+*{
+	color: white; 
+}
+.parent{
+    background: #0088aa;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+    width: 200px;
+	text-align: center;
+}
+.title{
+	font-size: 1.1em;
+	border-bottom: 1px solid lightgray;
+	padding-bottom: 5px;
+}
+.buttons{
+	display: flex;
+}
+button{
+	width: 35%;
+	padding: 7px;
+	margin: 0;
+	text-align: center;
+	border-radius: 0;
+}
+label{
+	flex-grow: 1;
+	background-color: white;
+	color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button:hover{
+	background-color: #007799;
+}
 </style>
