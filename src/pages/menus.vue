@@ -4,11 +4,9 @@
     <div class="recycler">
       <resto-menu v-for="recette in recettes" :recette="recette" @item_add="addToCart" :quantite="getCartQuantite(recette)"/>
     </div>
-    <ul class="floating-menu floating-left floating-top">
-      <li><a href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
+    <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
         panier ({{cart.length}})
-      </a></li>
-    </ul>
+    </button>
     <cart-popover :visible='popover_opened' :cart='cart' @item_add="addToCart"/>
   </div>
 </template>
@@ -69,5 +67,13 @@ export default {
 };
 </script>
 <style scoped>
-  
+.btn-panier{
+  border-radius: 0 5px 5px 0;
+  position: absolute;
+  top:50px;
+  font-weight: bold;
+  margin: 0;
+  background-color: #955;
+  z-index: 3;
+}
 </style>

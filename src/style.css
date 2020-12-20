@@ -45,6 +45,16 @@ input[type=submit], button{
   display: flex;
   flex-wrap: wrap;
 }
+.logout{
+  border-radius: 5px 0 0 5px;
+  position: absolute;
+  top:50px;
+  right: 0;
+  font-weight: bold;
+  margin: 0;
+  background-color: #955;
+  z-index: 3;
+}
 button:focus {outline:0;}
 @media screen and (max-width: 650px){
 }

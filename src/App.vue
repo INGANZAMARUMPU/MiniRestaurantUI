@@ -4,9 +4,9 @@
     <div v-if="logged_in">
       <top-bar :user="user"></top-bar>
       <router-view/>
-      <ul class="floating-menu floating-right floating-top">
-        <li><a @click="logged_in=false">logout</a></li>
-      </ul>
+      <button @click="logged_in=false" class="logout">
+        logout
+      </button>
     </div>
     <div v-else>
       <app-login :state="logged_in" @connected="connection"></app-login>
@@ -57,5 +57,4 @@ export default {
 };
 </script>
 <style src="./style.css">
-  
 </style>
