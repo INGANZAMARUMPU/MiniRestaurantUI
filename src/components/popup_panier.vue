@@ -75,4 +75,35 @@ export default {
 	}
 };
 </script>
-<style scoped></style>
+<style scoped>
+.popup{
+	position: fixed;
+	background-color: rgb(0,0,0,0.5);
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	overflow-y: scroll;
+	z-index: 3;
+}
+.popup.active{
+	visibility: visible;
+}
+.popup-body{
+	position: absolute;
+	border-radius: 5px;
+	top:30%;
+	left:50%;
+	transform: translate(-50%, -30%);
+	background-color: white;
+	opacity: 1;
+	padding: 5px;
+}
+.header-panier{
+	font-size: 1.5em;
+	margin: 2px;
+	font-weight: bold;
+	text-align:  center;
+}
+</style>

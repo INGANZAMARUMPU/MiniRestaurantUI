@@ -7,7 +7,8 @@
 	box-sizing: border-box;
 	text-decoration: none;
   	margin: 0;
-  	padding: 0;	
+  	padding: 0;
+  	outline:0;
 }
 html {
 	font-family: sans-serif;
@@ -53,8 +54,31 @@ input[type=submit], button{
   font-weight: bold;
   margin: 0;
   background-color: #955;
-  z-index: 3;
+  z-index: 2;
 }
-button:focus {outline:0;}
+tr th{
+	background-color: #f5f5f5;
+}
+tr:nth-child(even) {
+  background-color: #eee;
+}
+td{
+	padding-right: 10px;
+}
+.table button, .table .btn{
+	padding: 3px 1em;
+}
+.table tr:hover {
+	background-color: #ddd;
+}
+.table {
+	border-collapse: collapse;
+	width: 100%;
+}
+.table th, .table td {
+	border-bottom: 1px solid #aaa;
+	text-align: left;
+	height: 30px;
+}
 @media screen and (max-width: 650px){
 }

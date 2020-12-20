@@ -15,7 +15,7 @@
 import { EVENT_BUS } from "../main";
 import searchbar from "../components/search";
 import menu from "../components/menu";
-import popover from "../components/popup";
+import popover from "../components/popup_panier";
 
 export default {
   components:{
@@ -74,6 +74,6 @@ export default {
   font-weight: bold;
   margin: 0;
   background-color: #955;
-  z-index: 3;
+  z-index: 2;
 }
 </style>
