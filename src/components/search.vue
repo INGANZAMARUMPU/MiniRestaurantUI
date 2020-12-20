@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
-    <form class="search-form">
+  <center>
+    <form>
       <input type="text" placeholder="Keyword" class="search-input" id="id_username" autofocus>
       <button type="reset">X</button>
     </form>
-  </div>
+  </center>
 </template>
 
 <script>

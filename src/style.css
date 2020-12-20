@@ -41,5 +41,9 @@ input[type=submit], button{
 	display: block;
 	width: 100%;
 }
+.recycler{
+  display: flex;
+  flex-wrap: wrap;
+}
 @media screen and (max-width: 650px){
 }

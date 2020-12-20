@@ -1,12 +1,12 @@
 <template>
-	<div class="basic-card bg-blue">
+	<div class="parent">
 		<div class="title">Table {{ number }}</div>
 		<div class="buttons">
-			<router-link class="semi-button"
+			<router-link
 				:to="{name:'serveurs', params:{id_table:id_table}}">
 				+Commande
 			</router-link>
-			<router-link to="#" class="semi-button border-left">Payer</router-link>
+			<router-link to="#">Payer</router-link>
 		</div>
 	</div>
 </template>
@@ -20,4 +20,36 @@ export default {
 };
 </script>
 <style scoped>
+*{
+	color: white; 
+}
+.parent{
+    background: #0088aa;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+    width: 200px;
+	text-align: center;
+}
+.title{
+	font-size: 1.3em;
+	border-bottom: 1px solid lightgray;
+}
+.buttons{
+	display: flex;
+}
+.buttons *{
+	width: 50%;
+	padding: 3px;
+	text-align: center;
+}
+.buttons *:hover{
+	width: 50%;
+	padding: 3px;
+	text-align: center;
+	background-color: #007799;
+}
+.buttons *:last-child{
+	border-left: 1px solid lightgray;
+}
 </style>
