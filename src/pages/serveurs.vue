@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <search-bar/>
+    <SearchBar/>
     <div class="recycler">
       <resto-person v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
       <!-- <resto-person v-for="serveur in serveurs" :serveur="serveur"/> -->
@@ -10,14 +10,11 @@
 
 <script>
 import { EVENT_BUS } from "../main";
-import searchbar from "../components/search";
+import SearchBar from "../components/search";
 import person from "../components/person";
 
 export default {
-  components:{
-    searchBar: searchbar,
-    restoPerson:person
-  },
+  components:{ SearchBar, restoPerson:person },
   data () {
     return{
       serveurs: EVENT_BUS.serveurs,
