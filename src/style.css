@@ -20,5 +20,26 @@ body,#body {
 	margin: 0;
 	padding: 0;
 }
+input[type=text], input[type=password]{
+	padding: 7px;
+	font-size: 12pt;
+    border-radius: 5px;
+}
+input[type=submit], button{
+	padding: 8px 15px;
+	font-size: 1em;
+    background: #0088aa;
+    border-radius: 8px;
+    border-width: 0;
+    color: white;
+    margin: 5px;
+}
+.field{
+	margin: 10px 0;
+}
+.field *{
+	display: block;
+	width: 100%;
+}
 @media screen and (max-width: 650px){
 }

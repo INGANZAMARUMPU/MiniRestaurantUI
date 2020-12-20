@@ -1,12 +1,18 @@
 <template>
-	<div>
-		<form action="." method="post" class="login-form">
+	<div class="centered">
+		<form action="." method="post">
 	    <h1>WELCOME BACK</h1>
-			<label for="id_username">Username&nbsp;:</label>
-			<input type="text" name="username" placeholder="Username " class="input" required="" id="id_username">
-			<label for="id_password">Password&nbsp;:</label>
-			<input type="password" name="password" placeholder="Password " class="input" required="" id="id_password">
-	    	<button class="btn right" @click.prevent="logIn">Log In</button>
+		    <div class="field">
+				<label for="id_username">Username&nbsp;:</label>
+				<input type="text" name="username" placeholder="Username " required="" id="id_username">
+			</div>
+		    <div class="field">
+				<label for="id_password">Password&nbsp;:</label>
+				<input type="password" name="password" placeholder="Password " required="" id="id_password">
+			</div>
+			<div class="btns">
+	    		<button @click.prevent="logIn">Log In</button>
+			</div>
 		</form>
 	</div>
 </template>
@@ -34,7 +40,20 @@ export default {
 };
 </script>
 <style scoped>
-label{
-	margin-top: 1em;
+.centered{
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+form{
+	background-color: white;
+	width: 400px;
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+}
+.btns{
+	display: flex;
+	justify-content: flex-end;
 }
 </style>
