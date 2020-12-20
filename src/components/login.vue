@@ -17,11 +17,10 @@
 	</div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	data(){
 		return {
-			user: null
+			user: this.$store.state.user,
 		}
 	},
 	props: {
