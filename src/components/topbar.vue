@@ -6,7 +6,7 @@
 			</li>
 			<li><router-link to="/commandes">Commandes</router-link>
 			<li class="toggle-submenu">
-				<router-link to="">Stock</router-link>
+				<router-link to="/stock">Stock</router-link>
 			</li>
 			<li v-if="user.is_staff" @mouseenter="e => showSubmenu(e)"
 				@mouseleave="e => hideSubmenu(e)">
@@ -78,6 +78,7 @@ li{
 .submenu a{
 	display: block;
 	padding: 3px 5px;
+	font-size: 14pt;
 }
 .submenu a:hover, li:hover{
 	background-color: #0088aa;
