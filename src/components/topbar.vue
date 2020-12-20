@@ -4,7 +4,7 @@
 			<li class="toggle-submenu">
 				<router-link :to="{name:'tables'}">Tables</router-link>
 			</li>
-			<li><router-link to="">Commandes</router-link>
+			<li><router-link to="/commandes">Commandes</router-link>
 			<li class="toggle-submenu">
 				<router-link to="">Stock</router-link>
 			</li>
@@ -58,7 +58,7 @@ a{
 }
 ul{
 	background-color: #007799;
-	font-size: 14pt;
+	font-size: 1.5em;
 	display: flex;
 }
 li{
@@ -73,6 +73,7 @@ li{
 	position: absolute;
 	background-color: #007799;
 	right: 0;
+	z-index: 3;
 }
 .submenu a{
 	display: block;

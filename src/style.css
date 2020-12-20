@@ -24,7 +24,8 @@ body,#body {
 input[type=text], input[type=password]{
 	padding: 7px;
 	font-size: 12pt;
-    border-radius: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 input[type=submit], button{
 	padding: 8px 15px;
