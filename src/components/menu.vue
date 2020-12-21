@@ -1,7 +1,7 @@
 <template>
 	<div class="parent" :data-id='recette.id'>
 		<div class="img food-img">
-			<img :src="recette.image"/>
+			<img :src="getIcon(recette)" height="112px" style="margin:5px" />
 		</div>
 		<div class="title">
 			<span class="name">{{ recette.nom }}</span>
@@ -27,6 +27,12 @@ export default {
 		}
 	},
 	methods: {
+		getIcon(recette){
+			if (recette.image == null) {
+				return "/img/recette.png";
+			}
+			return recette.image;
+		},
 		increaseQtt : function(){
 			this.quantite++;
 			this.$emit("item_add", {
@@ -57,14 +63,17 @@ export default {
     margin: 3px;
     width: 200px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 .title{
 	font-size: 1.1em;
-	border-bottom: 1px solid lightgray;
 	padding-bottom: 5px;
 }
 .buttons{
 	display: flex;
+	margin-top: auto;
+	border-top: 1px solid lightgray;
 }
 button{
 	width: 35%;

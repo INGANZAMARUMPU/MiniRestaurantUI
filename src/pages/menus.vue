@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { EVENT_BUS } from "../main";
 import searchbar from "../components/search";
 import menu from "../components/menu";
 import popover from "../components/popup_panier";
@@ -25,7 +24,7 @@ export default {
   },
   data () {
     return{
-      recettes: EVENT_BUS.recettes,
+      recettes: this.$store.state.recettes,
       cart:[],
       popover_opened:false
     }
@@ -33,7 +32,7 @@ export default {
   methods: {
     addToCart(data){
       let position = this.findPositionInCart(data.recette.id);
-      if((position>=0)&(data.quantite == 0)){
+      if((position>=0)&&(data.quantite == 0)){
         this.cart.shift(position);
         return;
       }
@@ -69,7 +68,7 @@ export default {
 <style scoped>
 .btn-panier{
   border-radius: 0 5px 5px 0;
-  position: absolute;
+  position: fixed;
   top:50px;
   font-weight: bold;
   margin: 0;
