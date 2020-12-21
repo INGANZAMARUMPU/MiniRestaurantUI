@@ -2,7 +2,7 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <TableItem v-for="x in (1,5)" :id_table="String(x)" :number="x"/>
+      <TableItem v-for="table in tables" :id_table="table.id" :number="table.number"/>
     </div>
   </div>
 </template>
@@ -16,10 +16,12 @@ export default {
   components:{ SearchBar, TableItem },
   data () {
     return{
-      
     }
   },
-  methods: {
+  computed:{
+    tables(){
+      return this.$store.state.tables;
+    }
   }
 };
 </script>
