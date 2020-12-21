@@ -4,12 +4,17 @@
 	    <h1>WELCOME BACK</h1>
 		    <div class="field">
 				<label for="id_username">Username&nbsp;:</label>
-				<input type="text" name="username" placeholder="Username " required="" id="id_username">
+				<input type="text" name="username" placeholder="Username " required
+					id="id_username" v-model="username" autocomplete="on">
 			</div>
 		    <div class="field">
 				<label for="id_password">Password&nbsp;:</label>
-				<input type="password" name="password" placeholder="Password " required="" id="id_password">
+				<input type="password" name="password" placeholder="Password " required
+					id="id_password" v-model="password" autocomplete="on">
 			</div>
+			<label for="id_password" v-if="error.length>0"
+				 style="color:red">{{ error }}
+			</label>
 			<div class="btns">
 	    		<button @click.prevent="logIn">Log In</button>
 			</div>
@@ -17,23 +22,36 @@
 	</div>
 </template>
 <script >
+import axios from "axios";
+
 export default {
 	data(){
 		return {
-			user: this.$store.state.user,
+			username:"",
+			password:"",
+			user: null,
+			error:""
 		}
-	},
-	props: {
-		state : { type:Boolean, required: true }
 	},
 	methods:{
 	    logIn(){
-	    	this.user = {
-				username:"default",
-				is_staff:true,
-				connected:true
-			};
-	    	this.$emit("connected", this.user);
+	    	this.error = ""
+			axios.post('http://127.0.0.1:8000/login/', {
+				"username": this.username,
+				"password": this.password
+			})
+			.then((response) => {
+				this.user = response.data;
+				if (this.user != null && this.user.access.length>20) {
+					this.$store.state.user = this.user;
+					this.$emit("connected", this.user);
+				} else {
+					this.error = "nom d'utilisateur ou mot de passe incorrect"
+				}
+			}).catch((error) => {
+				this.error = "erreur de connectivité"
+				console.error(error);
+			});
 	    }
 	}
 };

@@ -8,7 +8,7 @@
 			<li class="toggle-submenu">
 				<router-link to="/stock">Stock</router-link>
 			</li>
-			<li v-if="user.is_staff" @mouseenter="e => showSubmenu(e)"
+			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"
 				@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Courbes</router-link>
 				<div class="submenu">
@@ -16,7 +16,7 @@
 					<router-link to="">Serveurs</router-link>
 				</div>
 			</li>
-			<li v-if="user.is_staff" @mouseenter="e => showSubmenu(e)"
+			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"
 				@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Gestion</router-link>
 				<div class="submenu">
