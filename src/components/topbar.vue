@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="parent">
 		<ul>
 			<li class="toggle-submenu">
 				<router-link :to="{name:'tables'}">Tables</router-link>
@@ -53,6 +53,10 @@ export default {
 };
 </script>
 <style scoped>
+.parent{
+	position: sticky;
+	top: 0;
+}
 a{
 	color: white;
 }

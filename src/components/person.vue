@@ -1,7 +1,7 @@
 <template>
 	<router-link :to="{name:'menus', params:{id_table:id_table, id_serveur:serveur.id}}" class="user-card">
 		<div class="img-user">
-			<img :src='serveur.avatar' alt="">
+			<img :src='getAvatar(serveur)' alt="">
 		</div>
 		<div class="username">
 			<div><h3>{{ serveur.tel }}</h3></div>
@@ -16,8 +16,16 @@ import EVENT_BUS from '../main'
 export default {
 	props: {
 		serveur: { type : Object, required:true},
-		id_table: { type : String, required:true}
+		id_table: { type : Number, required:true}
 	},
+	methods:{
+		getAvatar(serveur){
+			if (serveur.avatar == null) {
+				return "/img/ic_user.png";
+			}
+			return serveur.avatar;
+		}
+	}
 };
 </script>
 <style scoped>

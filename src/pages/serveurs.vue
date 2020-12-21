@@ -17,7 +17,7 @@ export default {
   components:{ SearchBar, restoPerson:person },
   data () {
     return{
-      serveurs: EVENT_BUS.serveurs,
+      serveurs: this.$store.state.serveurs,
     }
   },
   methods: {
