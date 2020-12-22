@@ -6,8 +6,8 @@ import Stock from "./pages/stock"
 
 export const routes = [
 	{path: "", component: Tables, name:"tables"},
-	{path: "/commande/:id_table", component: Serveurs, name:"serveurs"},
-	{path: "/commande/:id_table/:id_serveur", component: Menus, name:"menus"},
+	{path: "/serveurs", component: Serveurs, name:"serveurs"},
+	{path: "/menus", component: Menus, name:"menus"},
 	{path: "/commandes/", component: Commandes, name:"commandes"},
 	{path: "/stock/", component: Stock, name:"stock"},
 ]

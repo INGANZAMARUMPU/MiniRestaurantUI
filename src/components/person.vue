@@ -1,22 +1,21 @@
 <template>
-	<router-link :to="{name:'menus', params:{id_table:id_table, id_serveur:serveur.id}}" class="user-card">
-		<div class="img-user">
-			<img :src='getAvatar(serveur)' alt="">
-		</div>
-		<div class="username">
-			<div><h3>{{ serveur.tel }}</h3></div>
-			<div>
-				{{ serveur.firstname }} {{ serveur.lastname }}
-			</div>
+<div class="user-card" @click="gotoMenus">
+	<div class="img-user">
+		<img :src='getAvatar(serveur)' alt="">
 	</div>
-	</router-link>
+	<div class="username">
+		<div><h3>{{ serveur.tel }}</h3></div>
+		<div>
+			{{ serveur.firstname }} {{ serveur.lastname }}
+		</div>
+	</div>
+</div>
 </template>
 <script >
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		serveur: { type : Object, required:true},
-		id_table: { type : Number, required:true}
+		serveur: { type : Object, required:true}
 	},
 	methods:{
 		getAvatar(serveur){
@@ -24,6 +23,10 @@ export default {
 				return "/img/ic_user.png";
 			}
 			return serveur.avatar;
+		},
+		gotoMenus(){
+			this.$store.state.selected_serveur = this.serveur;
+			this.$router.push('menus');
 		}
 	}
 };

@@ -35,7 +35,10 @@
 				</tfoot>
 			</table>
 			<div class="btns-valider">
-				<button style="margin-right:3px" id="valider-panier">valider</button>
+				<button style="margin-right:3px"id="valider-panier"
+					@click="validerCommande">
+					valider
+				</button>
 				<button id="valider_imprimer">valider et imprimer</button>
 			</div>
 		</div>
@@ -63,6 +66,9 @@ export default {
 					"quantite": item.quantite
 				})
 			}
+		},
+		validerCommande(){
+			
 		}
 	},
 	watch:{

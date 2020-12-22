@@ -11,6 +11,9 @@ export const store = new Vuex.Store({
 		tables : [],
 		commandes : [],
 		stocks : [],
+		host:"http://127.0.0.1:8000",
+		selected_serveur: null,
+		selected_table: null
 	},
 	mutations: {},
 	actions: {},

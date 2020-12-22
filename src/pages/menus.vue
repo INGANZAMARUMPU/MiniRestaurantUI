@@ -7,20 +7,20 @@
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
         panier ({{cart.length}})
     </button>
-    <cart-popover :visible='popover_opened' :cart='cart' @item_add="addToCart"/>
+    <CartDialog :visible='popover_opened' :cart='cart' @item_add="addToCart"/>
   </div>
 </template>
 
 <script>
 import searchbar from "../components/search";
 import menu from "../components/menu";
-import popover from "../components/popup_panier";
+import CartDialog from "../components/popup_panier";
 
 export default {
   components:{
     searchBar: searchbar,
     restoMenu:menu,
-    cartPopover:popover
+    CartDialog
   },
   data () {
     return{

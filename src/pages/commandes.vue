@@ -47,6 +47,27 @@ import menu from "../components/menu";
 
 export default {
   components:{ SearchBar, restoMenu:menu, DateFilter },
+  computed:{
+    commandes(){
+      result = this.$store.state.commandes;
+      if( result !=null ){
+        return result
+      }
+      let headers = {
+        headers: {
+          "Authorization": "Bearer " + this.user.access
+        }
+      }
+      axios.get(this.$store.state.host+'/commandes/', headers)
+        .then((response) => {
+          this.$store.state.commandes = response.data;
+          return response.data;
+        }).catch((error) => {
+          console.error(error);
+        });
+      return [];
+    }
+  }
 };
 </script>
 <style scoped>

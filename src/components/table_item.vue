@@ -1,12 +1,11 @@
 <template>
 	<div class="parent">
-		<div class="title">Table {{ number }}</div>
+		<div class="title">Table {{ table.number }}</div>
 		<div class="buttons">
-			<router-link
-				:to="{name:'serveurs', params:{id_table:id_table}}">
+			<button @click="gotoServeurs">
 				+Commande
-			</router-link>
-			<router-link to="#">Payer</router-link>
+			</button>
+			<button>Payer</button>
 		</div>
 	</div>
 </template>
@@ -14,9 +13,14 @@
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		id_table: { type : Number, required:true},
-		number: { type : Number, required:true}
+		table: { type : Object, required:true },
 	},
+	methods:{
+		gotoServeurs(){
+			this.$store.state.selected_table = this.table;
+			this.$router.push('serveurs')
+		}
+	}
 };
 </script>
 <style scoped>
@@ -43,6 +47,8 @@ export default {
 	width: 50%;
 	padding: 3px;
 	text-align: center;
+	border-radius: 0;
+	margin: 0;
 }
 .buttons *:hover{
 	background-color: #007799;

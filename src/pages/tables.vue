@@ -2,7 +2,7 @@
   <div id="app">
     <search-bar/>
     <div class="recycler">
-      <TableItem v-for="table in tables" :id_table="table.id" :number="table.number"/>
+      <TableItem v-for="table in tables" :table="table"/>
     </div>
   </div>
 </template>
