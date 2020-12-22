@@ -56,6 +56,7 @@ export default {
 .parent{
 	position: sticky;
 	top: 0;
+	margin-bottom: 10px;
 }
 a{
 	color: white;

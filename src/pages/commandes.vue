@@ -1,6 +1,9 @@
 <template>
   <div id="app" @click="popover_opened=false">
-    <search-bar/>
+    <div class="top">
+      <SearchBar/>
+      <DateFilter/>
+    </div>
     <div class="recycler">
     </div>
       <div class="scrollable-tab">
@@ -37,19 +40,20 @@
 
 <script>
 import { EVENT_BUS } from "../main";
-import searchbar from "../components/search";
+import SearchBar from "../components/search";
+import DateFilter from "../components/date_filter";
 import menu from "../components/menu";
 // import popover from "../components/popup_panier";
 
 export default {
-  components:{
-    searchBar: searchbar,
-    restoMenu:menu,
-    // cartPopover:popover
-  },
+  components:{ SearchBar, restoMenu:menu, DateFilter },
 };
 </script>
 <style scoped>
+.top{
+  display: flex;
+  justify-content: center;
+}
 .scrollable-tab{
   width: 100%;
   /*height: 0px;*/

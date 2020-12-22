@@ -1,5 +1,5 @@
 <template>
-  <center style="margin:10px">
+  <center>
     <form>
       <input type="text" placeholder="Keyword" class="search-input" id="id_username" autofocus>
       <button type="reset">X</button>
