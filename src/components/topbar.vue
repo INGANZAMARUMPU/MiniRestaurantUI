@@ -57,6 +57,7 @@ export default {
 	position: sticky;
 	top: 0;
 	margin-bottom: 10px;
+	z-index: 3;
 }
 a{
 	color: white;
@@ -78,7 +79,6 @@ li{
 	position: absolute;
 	background-color: #007799;
 	right: 0;
-	z-index: 3;
 }
 .submenu a{
 	display: block;

@@ -92,14 +92,15 @@ export default {
 							this.$store.state.host+"/detail_commande/",
 							details_commande, headers
 						).then((response) => {
-							this.$store.state.commandes.unshift(response.data);
-							this.cart.content.shift(item);
+							commande.details.push(item);
 							this.$emit("close", null);
 							this.erreur = "";
 						}).catch((error) => {
 							this.erreur = error;
+							return;
 						});
 					}
+					this.$store.state.commandes.unshift(commande);
 				}).catch((error) => {
 					console.error(error);
 				});

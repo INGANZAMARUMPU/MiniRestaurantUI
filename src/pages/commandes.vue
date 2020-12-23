@@ -1,7 +1,7 @@
 <template>
   <div id="app" @click="popover_opened=false">
     <div class="top">
-      <SearchBar/>
+      <SearchBar @changed="search"/>
       <DateFilter/>
     </div>
     <div class="recycler">
@@ -21,13 +21,28 @@
             </tr>
           </thead>
           <tbody id="commandes">
+              <tr v-for="commande in commandes">
+                <td>#{{ commande.id }}</td>
+                <td>Table {{ commande.table }}</td>
+                <td>{{ commande.serveur_name }}</td>
+                <td>{{ commande.a_payer }}</td>
+                <td>{{ commande.payee }}</td>
+                <td>{{ commande.reste }}</td>
+                <td>{{ commande.date }}</td>
+                <td>
+                  <div class="btns">
+                    <a href="{% url 'details' commande.id %}" class="btn url_button" id="commande_details">détails</a>
+                    <a href="{% url 'payer_commande' commande.id %}" class="btn url_button">payer</a>
+                  </div>
+                </td>
+              </tr>
           </tbody>
           <tfoot>
             <tr class="panier-item">
               <th colspan="3">total</th>
-              <th id="commande-somme">0</th>
-              <th id="commande-payee">0</th>
-              <th id="commande-reste">0</th>
+              <th>{{ tot_a_payer }}</th>
+              <th>{{ tot_payee }}</th>
+              <th>{{ tot_reste }}</th>
               <th></th>
               <th></th>
             </tr>
@@ -39,7 +54,7 @@
 </template>
 
 <script>
-import { EVENT_BUS } from "../main";
+import axios from "axios";
 import SearchBar from "../components/search";
 import DateFilter from "../components/date_filter";
 import menu from "../components/menu";
@@ -47,18 +62,25 @@ import menu from "../components/menu";
 
 export default {
   components:{ SearchBar, restoMenu:menu, DateFilter },
+  data(){
+    return{
+      tot_a_payer: 0,
+      tot_payee: 0,
+      tot_reste: 0,
+    }
+  },
   computed:{
     commandes(){
-      result = this.$store.state.commandes;
-      if( result !=null ){
-        return result
+      let result = this.$store.state.commandes;
+      if( result != null ){
+        if (result.length > 0) return result
       }
       let headers = {
         headers: {
-          "Authorization": "Bearer " + this.user.access
+          "Authorization": "Bearer " + this.$store.state.user.access
         }
       }
-      axios.get(this.$store.state.host+'/commandes/', headers)
+      axios.get(this.$store.state.host+'/commande/', headers)
         .then((response) => {
           this.$store.state.commandes = response.data;
           return response.data;
@@ -66,6 +88,23 @@ export default {
           console.error(error);
         });
       return [];
+    }
+  },
+  methods:{
+    totApayer(a_payer){
+      this.tot_a_payer += a_payer;
+      return a_payer;
+    },
+    totPayee(payee){
+      this.tot_payee += payee;
+      return payee;
+    },
+    totReste(reste){
+      this.tot_reste += reste;
+      return reste;
+    },
+    search(string){
+      console.log(string);
     }
   }
 };
