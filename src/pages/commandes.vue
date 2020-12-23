@@ -67,27 +67,26 @@ export default {
       tot_a_payer: 0,
       tot_payee: 0,
       tot_reste: 0,
+      commandes : []
     }
   },
-  computed:{
-    commandes(){
-      let result = this.$store.state.commandes;
-      if( result != null ){
-        if (result.length > 0) return result
-      }
+  mounted(){
+    let result = this.$store.state.commandes;
+    if (result.length > 0){
+      this.commandes = result;
+    } else {
       let headers = {
         headers: {
           "Authorization": "Bearer " + this.$store.state.user.access
         }
       }
       axios.get(this.$store.state.host+'/commande/', headers)
-        .then((response) => {
-          this.$store.state.commandes = response.data;
-          return response.data;
-        }).catch((error) => {
-          console.error(error);
-        });
-      return [];
+      .then((response) => {
+        this.$store.state.commandes = response.data;
+        this.commandes = response.data;
+      }).catch((error) => {
+        console.error(error);
+      });
     }
   },
   methods:{
@@ -104,7 +103,17 @@ export default {
       return reste;
     },
     search(string){
-      console.log(string);
+      this.commandes = [];
+      for(var i = 0; i < this.$store.state.commandes.length; i++){
+        let commande = this.$store.state.commandes[i];
+        for (let key in commande) {
+          var value = String(commande[key]).toLowerCase();
+          if (value.search(string.toLowerCase()) >= 0 ) {
+            this.commandes.push(commande);
+            break;
+          }
+        }
+      }
     }
   }
 };
