@@ -87,12 +87,14 @@ export default {
 							"recette": item.recette.id,
 							"quantite": item.quantite
 						};
-						console.log(details_commande);
 						axios.post(
 							this.$store.state.host+"/detail_commande/",
 							details_commande, headers
 						).then((response) => {
-							commande.details.push(item);
+							details_commande = response.data
+							commande.details.push(details_commande);
+							commande.a_payer += details_commande.somme;
+							this.$store.state.cart.content = []
 							this.$emit("close", null);
 							this.erreur = "";
 						}).catch((error) => {
