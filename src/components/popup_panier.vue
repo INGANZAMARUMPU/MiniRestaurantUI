@@ -14,11 +14,11 @@
 					</tr>
 				</thead>
 				<tbody class=".popup-content">
-					<tr v-for="item in cart" v-if="item.quantite>0">
+					<tr v-for="item in cart.content" v-if="item.quantite>0">
 						<td>{{item.recette.nom}}</td>
 						<td>{{item.recette.prix}}</td>
 						<td>{{item.quantite}}</td>
-						<td>{{item.recette.prix*item.quantite}}</td>
+						<td>{{item.getTotal()}}</td>
 						<td><button class="panier_moins" @click="decreaseQtt(item)">-</button></td>
 						<td><button class="panier_plus" @click="increaseQtt(item)">+</button></td>
 					</tr>
@@ -28,7 +28,7 @@
 						<td>total</td>
 						<td></td>
 						<td></td>
-						<td id="total"></td>
+						<td>{{ cart.getTotal() }}</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -45,37 +45,49 @@
 	</div>
 </template>
 <script>
+import axios from "axios";
 export default {
 	props: {
-		cart:{ type:Array, default:[]},
 		visible:{ type:Boolean, default:false}
+	},
+	data () {
+		return {
+			cart : this.$store.state.cart,
+		}
 	},
 	methods: {
 		increaseQtt : function(item){
-			item.quantite++;
-			this.$emit("item_add", {
-				"recette": item.recette,
-				"quantite": item.quantite
-			})
+			this.cart.add(item.recette);
 		},
 		decreaseQtt : function(item){
-			if(item.quantite>0){
-				item.quantite--;
-				this.$emit("item_add", {
-					"recette": item.recette,
-					"quantite": item.quantite
-				})
-			}
+			this.cart.decrease(item.recette.id);
 		},
 		validerCommande(){
-			
-		}
-	},
-	watch:{
-		cart:function(value){
-			if(this.cart.length < 1){
-				console.log('cart empty')
-				this.$emit("edition_done", this.cart);
+			let headers = {
+				headers: {
+				"Authorization": "Bearer " + this.$store.state.user.access
+				}
+			}
+			for(var i = 0; i < this.cart.length; i++){
+				let cart_item = this.cart[i];
+				let commande = {
+					"tel": "",
+					"date": new Date().toISOString().slice(0,10),
+					"a_payer": cart_item.recette.prix*cart_item.quantite,
+					"payee": cart_item.recette.prix*cart_item.quantite,
+					"reste": 0,
+					"table": this.$store.state.selected_table.id,
+					"serveur": this.$store.state.selected_serveur.id,
+					"personnel": this.$store.state.user.id
+				};
+				// axios.post(
+				// 	this.$store.state.host+"/commande/",
+				// 	commande, headers
+				// ).then((response) => {
+				// 	this.$store.state.commandes.unshift(response.data);
+				// }).catch((error) => {
+				// console.error(error);
+				// });
 			}
 		}
 	}

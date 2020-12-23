@@ -23,7 +23,7 @@ export default {
 	},
 	data:function (){
 		return {
-			quantite : 0
+			cart : this.$store.state.cart,
 		}
 	},
 	methods: {
@@ -34,20 +34,15 @@ export default {
 			return recette.image;
 		},
 		increaseQtt : function(){
-			this.quantite++;
-			this.$emit("item_add", {
-				"recette": this.recette,
-				"quantite": this.quantite
-			})
+			this.cart.add(this.recette);
 		},
 		decreaseQtt : function(){
-			if(this.quantite>0){
-				this.quantite--;
-				this.$emit("item_add", {
-					"recette": this.recette,
-					"quantite": this.quantite
-				})
-			}
+			this.cart.decrease(this.recette.id);
+		}
+	},
+	computed:{
+		quantite(){
+			return this.cart.getQuantite(this.recette.id);
 		}
 	}
 };
