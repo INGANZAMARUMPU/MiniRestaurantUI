@@ -34,6 +34,7 @@
 					</tr>
 				</tfoot>
 			</table>
+			<label style="color:red" v-if="erreur!=''">{{ erreur }}</label>
 			<div class="btns-valider">
 				<button style="margin-right:3px"id="valider-panier"
 					@click="validerCommande">
@@ -53,7 +54,7 @@ export default {
 	data () {
 		return {
 			cart : this.$store.state.cart,
-		}
+			erreur : "",		}
 	},
 	methods: {
 		increaseQtt : function(item){
@@ -68,27 +69,40 @@ export default {
 				"Authorization": "Bearer " + this.$store.state.user.access
 				}
 			}
-			for(var i = 0; i < this.cart.length; i++){
-				let cart_item = this.cart[i];
-				let commande = {
-					"tel": "",
-					"date": new Date().toISOString().slice(0,10),
-					"a_payer": cart_item.recette.prix*cart_item.quantite,
-					"payee": cart_item.recette.prix*cart_item.quantite,
-					"reste": 0,
-					"table": this.$store.state.selected_table.id,
-					"serveur": this.$store.state.selected_serveur.id,
-					"personnel": this.$store.state.user.id
-				};
-				// axios.post(
-				// 	this.$store.state.host+"/commande/",
-				// 	commande, headers
-				// ).then((response) => {
-				// 	this.$store.state.commandes.unshift(response.data);
-				// }).catch((error) => {
-				// console.error(error);
-				// });
-			}
+			// let date = new Date().toISOString().slice(0,10);
+			let commande = {
+				"table": this.$store.state.selected_table.id,
+				"serveur": this.$store.state.selected_serveur.id,
+				"personnel": this.$store.state.user.id
+			};
+			axios.post(
+				this.$store.state.host+"/commande/",
+					commande, headers
+				).then((response) => {
+					commande = response.data;
+					for(var i = 0; i < this.cart.getLength(); i++){
+						let item = this.cart.content[i];
+						let details_commande = {
+							"commande": commande.id,
+							"recette": item.recette.id,
+							"quantite": item.quantite
+						};
+						console.log(details_commande);
+						axios.post(
+							this.$store.state.host+"/detail_commande/",
+							details_commande, headers
+						).then((response) => {
+							this.$store.state.commandes.unshift(response.data);
+							this.cart.content.shift(item);
+							this.$emit("close", null);
+							this.erreur = "";
+						}).catch((error) => {
+							this.erreur = error;
+						});
+					}
+				}).catch((error) => {
+					console.error(error);
+				});
 		}
 	}
 };

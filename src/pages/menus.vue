@@ -7,7 +7,8 @@
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
         panier ({{cart.getLength()}})
     </button>
-    <CartDialog :visible='popover_opened' :cart='cart'/>
+    <CartDialog :visible='popover_opened' :cart='cart'
+      @close="popover_opened=false"/>
   </div>
 </template>
 
