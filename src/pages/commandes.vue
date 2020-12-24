@@ -40,9 +40,9 @@
           <tfoot>
             <tr class="panier-item">
               <th colspan="3">total</th>
-              <th>{{ tot_a_payer }}</th>
-              <th>{{ tot_payee }}</th>
-              <th>{{ tot_reste }}</th>
+              <th>{{ totals.a_payer }}</th>
+              <th>{{ totals.payee }}</th>
+              <th>{{ totals.reste }}</th>
               <th></th>
               <th></th>
             </tr>
@@ -64,10 +64,19 @@ export default {
   components:{ SearchBar, restoMenu:menu, DateFilter },
   data(){
     return{
-      tot_a_payer: 0,
-      tot_payee: 0,
-      tot_reste: 0,
       commandes : []
+    }
+  },
+  computed:{
+    totals(){
+      let tots = { a_payer: 0, payee: 0, reste: 0}
+      if (this.commandes.length == 0 ) return tots;
+      for(let commande of this.commandes) {
+        tots.a_payer += commande.a_payer;
+        tots.payee += commande.payee;
+        tots.reste += commande.reste;
+      }
+      return tots;
     }
   },
   mounted(){
@@ -90,18 +99,6 @@ export default {
     }
   },
   methods:{
-    totApayer(a_payer){
-      this.tot_a_payer += a_payer;
-      return a_payer;
-    },
-    totPayee(payee){
-      this.tot_payee += payee;
-      return payee;
-    },
-    totReste(reste){
-      this.tot_reste += reste;
-      return reste;
-    },
     search(string){
       this.commandes = [];
       for(var i = 0; i < this.$store.state.commandes.length; i++){
