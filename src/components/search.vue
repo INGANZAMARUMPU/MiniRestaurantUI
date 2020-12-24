@@ -1,7 +1,7 @@
 <template>
   <center>
     <form>
-      <input type="text" placeholder="Keyword" class="search-input"
+      <input type="text" placeholder="Keyword"
       	id="id_username" v-model="keyword" autofocus>
       <button type="reset">X</button>
     </form>

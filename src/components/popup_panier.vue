@@ -2,7 +2,7 @@
 	<div id="panier" :class="{popup:true, active:visible}"  @click="visible=false">
 		<div class="popup-body" @click.prevent.stop>
 			<table class="table panier">
-				<caption class="header-panier">Panier</caption>
+				<caption class="title">Panier</caption>
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -54,7 +54,8 @@ export default {
 	data () {
 		return {
 			cart : this.$store.state.cart,
-			erreur : "",		}
+			erreur : "",
+		}
 	},
 	methods: {
 		increaseQtt : function(item){
@@ -91,7 +92,7 @@ export default {
 							this.$store.state.host+"/detail_commande/",
 							details_commande, headers
 						).then((response) => {
-							details_commande = response.data
+							details_commande = response.data;
 							commande.details.push(details_commande);
 							commande.a_payer += details_commande.somme;
 							this.$store.state.cart.content = []
@@ -110,35 +111,5 @@ export default {
 	}
 };
 </script>
-<style scoped>
-.popup{
-	position: fixed;
-	background-color: rgb(0,0,0,0.5);
-	top:0;
-	left:0;
-	width: 100%;
-	height: 100%;
-	visibility: hidden;
-	overflow-y: scroll;
-	z-index: 3;
-}
-.popup.active{
-	visibility: visible;
-}
-.popup-body{
-	position: absolute;
-	border-radius: 5px;
-	top:30%;
-	left:50%;
-	transform: translate(-50%, -30%);
-	background-color: white;
-	opacity: 1;
-	padding: 5px;
-}
-.header-panier{
-	font-size: 1.5em;
-	margin: 2px;
-	font-weight: bold;
-	text-align:  center;
-}
+<style>
 </style>
