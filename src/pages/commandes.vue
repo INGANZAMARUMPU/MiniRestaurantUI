@@ -31,11 +31,12 @@
                 <td>{{ commande.date }}</td>
                 <td>
                   <div class="btns">
-                    <button
-                      class="btn url_button" id="commande_details"
-                      @click="showDetails(commande)">détails
+                    <button @click="showDetails(commande)">
+                      détails
                     </button>
-                    <a href="{% url 'payer_commande' commande.id %}" class="btn url_button">payer</a>
+                    <button @click="showPay(commande)">
+                      payer
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -54,6 +55,8 @@
       </div>
     <DetailsDialog :visible='details_opened' :commande='active_commande'
       @close="details_opened=false"/>
+    <PayDialog :visible='pay_opened' :commande='active_commande'
+      @close="pay_opened=false"/>
   </div>
 </template>
 
@@ -63,14 +66,24 @@ import SearchBar from "../components/search";
 import DateFilter from "../components/date_filter";
 import menu from "../components/menu";
 import DetailsDialog from "../components/popup_details";
+import PayDialog from "../components/popup_payer";
 
 export default {
-  components:{ SearchBar, restoMenu:menu, DateFilter, DetailsDialog },
+  components:{
+    SearchBar, restoMenu:menu, DateFilter, DetailsDialog,
+    PayDialog
+  },
   data(){
     return{
       commandes : [],
       details_opened:false,
-      active_commande : null,
+      pay_opened:false,
+      active_commande :{
+        "details": [], "a_payer": 0,"serveur_name": "",
+        "date": "2020-12-23T21:54:10.326506Z",
+        "payee": 0, "reste": 0, "table": 0,
+        "serveur": 0, "personnel": 0, "tel": ""
+      },
     }
   },
   computed:{
@@ -121,6 +134,10 @@ export default {
     showDetails(commande){
       this.active_commande = commande;
       this.details_opened = true;
+    },
+    showPay(commande){
+      this.active_commande = commande;
+      this.pay_opened = true;
     }
   }
 };
