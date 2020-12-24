@@ -31,7 +31,10 @@
                 <td>{{ commande.date }}</td>
                 <td>
                   <div class="btns">
-                    <a href="{% url 'details' commande.id %}" class="btn url_button" id="commande_details">détails</a>
+                    <button
+                      class="btn url_button" id="commande_details"
+                      @click="showDetails(commande)">détails
+                    </button>
                     <a href="{% url 'payer_commande' commande.id %}" class="btn url_button">payer</a>
                   </div>
                 </td>
@@ -49,7 +52,8 @@
           </tfoot>
         </table>
       </div>
-    <!-- <cart-popover :visible='popover_opened' :cart='cart' @item_add="addToCart"/> -->
+    <DetailsDialog :visible='details_opened' :commande='active_commande'
+      @close="details_opened=false"/>
   </div>
 </template>
 
@@ -58,13 +62,15 @@ import axios from "axios";
 import SearchBar from "../components/search";
 import DateFilter from "../components/date_filter";
 import menu from "../components/menu";
-// import popover from "../components/popup_panier";
+import DetailsDialog from "../components/popup_details";
 
 export default {
-  components:{ SearchBar, restoMenu:menu, DateFilter },
+  components:{ SearchBar, restoMenu:menu, DateFilter, DetailsDialog },
   data(){
     return{
-      commandes : []
+      commandes : [],
+      details_opened:false,
+      active_commande : null,
     }
   },
   computed:{
@@ -111,6 +117,10 @@ export default {
           }
         }
       }
+    },
+    showDetails(commande){
+      this.active_commande = commande;
+      this.details_opened = true;
     }
   }
 };
