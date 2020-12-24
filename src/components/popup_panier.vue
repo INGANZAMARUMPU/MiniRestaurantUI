@@ -1,5 +1,5 @@
 <template>
-	<div id="panier" :class="{popup:true, active:visible}"  @click="visible=false">
+	<div id="panier" :class="{popup:true, active:visible}"  @click="close">
 		<div class="popup-body" @click.prevent.stop>
 			<table class="table panier">
 				<caption class="title">Panier</caption>
@@ -58,6 +58,9 @@ export default {
 		}
 	},
 	methods: {
+		close(){
+			this.$emit("close");
+		},
 		increaseQtt : function(item){
 			this.cart.add(item.recette);
 		},

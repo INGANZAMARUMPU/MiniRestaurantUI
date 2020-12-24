@@ -1,5 +1,5 @@
 <template>
-	<div id="panier" :class="{popup:true, active:visible}" @click="visible=false">
+	<div id="panier" :class="{popup:true, active:visible}" @click="close">
 		<div class="popup-body" @click.prevent.stop>
 			<table class="table panier">
 				<caption class="title">Details Commande #{{commande.id}}</caption>
@@ -46,6 +46,9 @@ export default {
 		commande:{ type:Object, required:true}
 	},
 	methods: {
+		close(){
+			this.$emit("close")
+		}
 	}
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<div :class="{popup:true, active:visible}" @click="visible=false">
+	<div :class="{popup:true, active:visible}" @click="close">
 		<div class="popup-body" @click.prevent.stop>
 			<center>
 				<h3>Payment facture #{{commande.id}}</h3>
@@ -32,6 +32,9 @@ export default {
 		}
 	},
 	methods: {
+		close(){
+			this.$emit("close")
+		}
 	}
 };
 </script>
