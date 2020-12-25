@@ -3,8 +3,8 @@
 		<div class="title">{{ produit.nom }}</div>
 		<div>{{ produit.quantite }} {{ produit.unite }}</div>
 		<div class="buttons">
-			<button>- Sortie</button>
-			<button>+ Entrée</button>
+			<button @click="decreaseStock">- Sortie</button>
+			<button @click="increaseStock">+ Entrée</button>
 		</div>
 	</div>
 </template>
@@ -12,14 +12,16 @@
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		produit: {
-			type : Object,
-			default:{
-				"id": 0, "unite_sortant": "","rapport": 0,
-				"quantite": 0,"nom": "", "unite": ""
-			}
-		}
+		produit: { type : Object, required: true}
 	},
+	methods:{
+		decreaseStock(){
+			this.$emit("out")
+		},
+		increaseStock(){
+			this.$emit("in")
+		}
+	}
 };
 </script>
 <style scoped>
