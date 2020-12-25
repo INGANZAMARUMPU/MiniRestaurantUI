@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SearchBar/>
+    <SearchBar @changed="search"/>
     <div class="recycler">
       <StockItem v-for="produit in stocks" :produit="produit"
         @out="decreaseStock(produit)" @in="increaseStock(produit)"/>

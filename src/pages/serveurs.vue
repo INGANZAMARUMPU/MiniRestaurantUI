@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SearchBar/>
+    <SearchBar @changed="search"/>
     <div class="recycler">
       <resto-person v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
       <!-- <resto-person v-for="serveur in serveurs" :serveur="serveur"/> -->
@@ -21,6 +21,19 @@ export default {
     }
   },
   methods: {
+    search(string){
+      this.serveurs = [];
+      for(var i = 0; i < this.$store.state.serveurs.length; i++){
+        let serveur = this.$store.state.serveurs[i];
+        for (let key in serveur) {
+          var value = String(serveur[key]).toLowerCase();
+          if (value.search(string.toLowerCase()) >= 0 ) {
+            this.serveurs.push(serveur);
+            break;
+          }
+        }
+      }
+    },
   }
 };
 </script>

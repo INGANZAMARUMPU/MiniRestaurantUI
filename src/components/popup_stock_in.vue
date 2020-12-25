@@ -2,7 +2,7 @@
 	<div :class="{popup:true, active:visible}" @click="close">
 		<div class="popup-body" @click.prevent.stop>
 			<center>
-				<h3>Diminuer {{produit.nom}}</h3>
+				<h3>Augmenter {{produit.nom}}</h3>
 			</center>
 			<form method="post">
 				<div class="field">

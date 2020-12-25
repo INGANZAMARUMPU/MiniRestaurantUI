@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <search-bar/>
+    <search-bar  @changed="search"/>
     <div class="recycler">
       <TableItem v-for="table in tables" :table="table"/>
     </div>
@@ -16,12 +16,26 @@ export default {
   components:{ SearchBar, TableItem },
   data () {
     return{
+      tables : []
     }
   },
-  computed:{
-    tables(){
-      return this.$store.state.tables;
-    }
+  mounted(){
+    this.tables = this.$store.state.tables;
+  },
+  methods:{
+    search(string){
+      if (string == "") {
+        this.tables = this.$store.state.tables;
+        return;
+      }
+      this.tables = [];
+      for(var i = 0; i < this.$store.state.tables.length; i++){
+        let table = this.$store.state.tables[i];
+        if (table.id == string ) {
+          this.tables.push(table);
+        }
+      }
+    },
   }
 };
 </script>

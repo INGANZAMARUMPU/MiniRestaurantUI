@@ -10,7 +10,7 @@
 			</li>
 			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"
 				@mouseleave="e => hideSubmenu(e)">
-				<router-link to="">Courbes</router-link>
+				<router-link to="">Statistiques</router-link>
 				<div class="submenu">
 					<router-link to="">Menu</router-link>
 					<router-link to="">Serveurs</router-link>
@@ -23,8 +23,7 @@
 				   <a target="blank" href="#">Tables</a>
 				   <a target="blank" href="#">Stock</a>
 				   <a target="blank" href="#">Produit</a>
-				   <a target="blank" href="#">Offre</a>
-				   <a target="blank" href="#">Fournisseur</a>
+				   <a target="blank" href="#">Recette</a>
 				   <a target="blank" href="#">Serveur</a>
 				</div>
 			</li>
@@ -32,7 +31,6 @@
 	</div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	props: {
 		user:{
