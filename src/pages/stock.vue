@@ -2,8 +2,13 @@
   <div id="app">
     <SearchBar/>
     <div class="recycler">
-      <StockItem v-for="produit in stocks" :produit="produit"/>
+      <StockItem v-for="produit in stocks" :produit="produit"
+        @out="decreaseStock(produit)" @in="increaseStock(produit)"/>
     </div>
+    <OutDialog :visible='out_dialog_opened' :produit='produit'
+      @close="out_dialog_opened=false"/>
+    <InDialog :visible='in_dialog_opened' :produit='produit'
+      @close="in_dialog_opened=false"/>
   </div>
 </template>
 
@@ -11,15 +16,19 @@
 import axios from "axios";
 import SearchBar from "../components/search";
 import StockItem from "../components/stock_item";
+import OutDialog from "../components/popup_stock_out";
+import InDialog from "../components/popup_stock_in";
 
 export default {
-  components:{ StockItem, SearchBar},
+  components:{ StockItem, SearchBar, OutDialog, InDialog},
   data(){
     return{
       stocks : [],
-      // details_opened:false,
-      // pay_opened:false,
-      active_stock :{
+      out_dialog_opened:false,
+      in_dialog_opened:false,
+      produit :{
+        "id": 0, "unite_sortant": "","rapport": 0,
+        "quantite": 0,"nom": "", "unite": ""
       },
     }
   },
@@ -55,6 +64,14 @@ export default {
           }
         }
       }
+    },
+    decreaseStock(produit){
+      this.produit = produit;
+      this.out_dialog_opened = true;
+    },
+    increaseStock(produit){
+      this.produit = produit;
+      this.in_dialog_opened = true;
     },
   }
 };
