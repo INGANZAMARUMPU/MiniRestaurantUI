@@ -1,12 +1,10 @@
 <template>
 	<div class="parent">
-		<div class="title">Table {{ number }}</div>
+		<div class="title">{{ produit.nom }}</div>
+		<div>{{ produit.quantite }} {{ produit.unite }}</div>
 		<div class="buttons">
-			<router-link
-				:to="{name:'serveurs', params:{id_table:id_table}}">
-				- Sortie
-			</router-link>
-			<router-link to="#">+ Entrée</router-link>
+			<button>- Sortie</button>
+			<button>+ Entrée</button>
 		</div>
 	</div>
 </template>
@@ -14,8 +12,13 @@
 import EVENT_BUS from '../main'
 export default {
 	props: {
-		id_table: { type : String, required:true},
-		number: { type : Number, required:true}
+		produit: {
+			type : Object,
+			default:{
+				"id": 0, "unite_sortant": "","rapport": 0,
+				"quantite": 0,"nom": "", "unite": ""
+			}
+		}
 	},
 };
 </script>
@@ -34,15 +37,17 @@ export default {
 .title{
 	font-size: 1.3em;
 	padding-bottom: 5px;
-	border-bottom: 1px solid lightgray;
 }
 .buttons{
 	display: flex;
+	border-top: 1px solid lightgray;
 }
 .buttons *{
 	width: 50%;
 	padding: 3px;
 	text-align: center;
+	border-radius: 0;
+	margin: 0;
 }
 .buttons *:hover{
 	background-color: #007799;

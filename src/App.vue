@@ -64,7 +64,9 @@ export default {
       }
     },
     logout(){
-      this.store.state.user = null;
+      localStorage.setItem('state', null);
+      this.$store.state.user = null;
+      this.user = null;
     },
     fetchData(){
       let headers = {
