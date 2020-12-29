@@ -3,9 +3,9 @@
     <button @click="triggered=!triggered">Date</button>
     <form v-if="triggered">
     	<label>Du:</label>
-    	<input type="date" name="date_du"/>
+    	<input type="date" name="date_du" v-model="date.du"/>
     	<label>Au:</label>
-    	<input type="date" name="date_au"/>
+    	<input type="date" name="date_au" v-model="date.au"/>
     	<input type="submit" value="search"
     		@click.prevent.stop="performSearch"
     		style="border:1px solid black" 
@@ -19,12 +19,14 @@ import EVENT_BUS from '../main'
 export default {
 	data(){
 		return {
-			triggered:false
+			date:{ du:null, au:null},
+			triggered:false,
 		}
 	},
 	methods:{
 		performSearch(){
 			this.triggered=false;
+			this.$emit("changed", this.date);
 		}
 	}
 };
