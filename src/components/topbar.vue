@@ -12,7 +12,7 @@
 				@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Statistiques</router-link>
 				<div class="submenu">
-					<router-link to="">Menu</router-link>
+					<router-link to="stat_menu">Menu</router-link>
 					<router-link to="">Serveurs</router-link>
 				</div>
 			</li>

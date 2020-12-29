@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
 		recettes : [],
 		tables : [],
 		commandes : [],
+		stats:{ menu:[], service:[]},
 		stocks : [],
 		host:"http://127.0.0.1:8000",
 		selected_serveur: null,
