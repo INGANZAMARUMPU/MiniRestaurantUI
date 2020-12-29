@@ -13,7 +13,7 @@
 				<router-link to="">Statistiques</router-link>
 				<div class="submenu">
 					<router-link to="stat_menu">Menu</router-link>
-					<router-link to="">Serveurs</router-link>
+					<router-link to="stat_service">Service</router-link>
 				</div>
 			</li>
 			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"

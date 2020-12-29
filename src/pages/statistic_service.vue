@@ -7,23 +7,23 @@
     <div class="recycler">
     </div>
       <div class="scrollable-tab">
-        <table class="table menus">
+        <table class="table services">
           <thead>
             <tr class="panier-item">
               <th>id</th>
-              <th>menu</th>
+              <th>serveur</th>
               <th>du</th>
               <th>au</th>
               <th>quantite</th>
             </tr>
           </thead>
-          <tbody id="menus">
-              <tr v-for="menu in menus">
-                <td>#{{ menu.id }}</td>
-                <td>{{ menu.nom }}</td>
+          <tbody id="services">
+              <tr v-for="service in services">
+                <td>#{{ service.id }}</td>
+                <td>{{ service.firstname+" "+service.lastname }}</td>
                 <td>{{ date_du }}</td>
                 <td>{{ date_au }}</td>
-                <td>{{ menu.quantite }}</td>
+                <td>{{ service.quantite }}</td>
               </tr>
           </tbody>
         </table>
@@ -37,23 +37,21 @@ import SearchBar from "../components/search";
 import DateFilter from "../components/date_filter";
 
 export default {
-  components:{
-    SearchBar, DateFilter
-  },
+  components:{ SearchBar, DateFilter },
   data(){
     return{
-      menus : [],
-      raw_menus : [],
+      services : [],
+      raw_services : [],
       date_du : new Date().toLocaleDateString('fr-CA'),
       date_au : new Date().toLocaleDateString('fr-CA'),
       headers : null
     }
   },
   mounted(){
-    let result = this.$store.state.stats.menu;
+    let result = this.$store.state.stats.service;
     if (result.length > 0){
-      this.menus = result;
-      this.raw_menus = result;
+      this.services = result;
+      this.raw_services = result;
     } else {
       let headers = {
         headers: {
@@ -61,11 +59,11 @@ export default {
         }
       };
       this.headers = headers;
-      axios.get(this.$store.state.host+'/statistic/menu/', headers)
+      axios.get(this.$store.state.host+'/statistic/service/', headers)
       .then((response) => {
-        this.$store.state.stats.menu = response.data;
-        this.menus = response.data;
-        this.raw_menus = response.data;
+        this.$store.state.stats.service = response.data;
+        this.services = response.data;
+        this.raw_services = response.data;
       }).catch((error) => {
         console.error(error);
       });
@@ -73,13 +71,13 @@ export default {
   },
   methods:{
     search(string){
-      this.menus = [];
-      for(var i = 0; i < this.raw_menus.length; i++){
-        let menu = this.raw_menus[i];
-        for (let key in menu) {
-          var value = String(menu[key]).toLowerCase();
+      this.services = [];
+      for(var i = 0; i < this.raw_services.length; i++){
+        let service = this.raw_services[i];
+        for (let key in service) {
+          var value = String(service[key]).toLowerCase();
           if (value.search(string.toLowerCase()) >= 0 ) {
-            this.menus.push(menu);
+            this.services.push(service);
             break;
           }
         }
@@ -89,10 +87,10 @@ export default {
       let date_du = new Date(dates.du).toLocaleDateString('fr-CA');
       let date_au = new Date(dates.au).toLocaleDateString('fr-CA');
       
-      axios.get(`${this.$store.state.host}/statistic/menu/${date_du}/${date_au}/`, this.headers)
+      axios.get(`${this.$store.state.host}/statistic/service/${date_du}/${date_au}/`, this.headers)
       .then((response) => {
-        this.menus = response.data;
-        this.raw_menus = response.data;
+        this.services = response.data;
+        this.raw_services = response.data;
         this.date_du = date_du;
         this.date_au = date_au;
       }).catch((error) => {
