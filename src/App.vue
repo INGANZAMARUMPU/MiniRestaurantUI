@@ -27,23 +27,29 @@ export default {
       user:this.$store.state.user,
     }
   },
+  computed:{
+    host(){
+      return this.$store.state.host
+    }
+  },
   created(){
     var state = JSON.parse(localStorage.getItem('state'));
     if (state) {
-      this.$store.state.user = state.user; 
+      this.$store.state.user = state.user;
+      axios.post(this.host+'/refresh/', {
+          "refresh": state.user.refresh
+        })
+        .then((response) => {
+          this.$store.state.user.access = response.data.access;
+        }).catch((error) => {
+          return;
+        });
       this.$store.state.serveurs = state.serveurs; 
       this.$store.state.recettes = state.recettes; 
       this.$store.state.tables = state.tables; 
       this.$store.state.commandes = state.commandes; 
-      this.$store.state.stocks = state.stocks; 
-      this.$store.state.host = state.host; 
-      this.$store.state.selected_serveur = state.selected_serveur; 
-      this.$store.state.selected_table = state.selected_table;
+      this.$store.state.stocks = state.stocks;
       this.user = state.user;
-      // restore CART items
-      // for(let item of state.cart.content){
-      //   this.$store.state.cart.add(item.recette);
-      // }
     } else {
       console.warn("il y'a pas de session");
     }
@@ -54,7 +60,7 @@ export default {
       handler(new_state){
         localStorage.setItem('state', JSON.stringify(new_state));  
       }
-    }
+    },
   },
   methods:{
     logIn(user){

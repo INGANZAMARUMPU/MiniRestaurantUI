@@ -36,11 +36,10 @@
 			</table>
 			<label style="color:red" v-if="erreur!=''">{{ erreur }}</label>
 			<div class="btns-valider">
-				<button style="margin-right:3px"id="valider-panier"
-					@click="validerCommande">
+				<button style="margin-right:3px" @click="validerCommande">
 					valider
 				</button>
-				<button id="valider_imprimer">valider et imprimer</button>
+				<button>valider et imprimer</button>
 			</div>
 		</div>
 	</div>

@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
 					if(item.quantite>0){
 						item.quantite--;
 					} else {
-						this.content.shift(item)
+						this.content.splice(position, 1)
 					}
 				}
 			},

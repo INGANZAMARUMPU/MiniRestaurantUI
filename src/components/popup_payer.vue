@@ -14,7 +14,7 @@
 					{{ payee - commande.a_payer }}
 				</b></div>
 				<input type="submit" name="payer"
-					style="align-self:flex-end;">
+					style="align-self:flex-end;" @click="performPayment">
 			</form>
 		</div>
 	</div>
@@ -34,6 +34,9 @@ export default {
 	methods: {
 		close(){
 			this.$emit("close")
+		},
+		performPayment(){
+
 		}
 	}
 };
