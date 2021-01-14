@@ -31,11 +31,32 @@ export default {
 			payee : 0,
 		}
 	},
+	computed:{
+		host(){
+			return this.$store.state.host
+		}
+	},
 	methods: {
 		close(){
 			this.$emit("close")
 		},
 		performPayment(){
+			let headers = {
+				headers: {
+					"Authorization": "Bearer " + this.$store.state.user.access
+				}
+			};
+			let data = {
+				commande:this.commande.id,
+				somme:this.payee
+			}
+			axios.post(this.host+'/paiement/', data, headers)
+			.then((response) => {
+				this.commande.payee += parseInt(this.payee);
+				this.close()
+			}).catch((error) => {
+				console.error(error);
+			});
 
 		}
 	}
