@@ -47,7 +47,6 @@ export default {
       this.$store.state.serveurs = state.serveurs; 
       this.$store.state.recettes = state.recettes; 
       this.$store.state.tables = state.tables;
-      this.$store.state.stocks = state.stocks;
       this.user = state.user;
     } else {
       console.warn("il y'a pas de session");
