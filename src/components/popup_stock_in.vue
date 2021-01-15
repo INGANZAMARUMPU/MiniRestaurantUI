@@ -15,8 +15,10 @@
 					<input type="number" placeholder="Prix d'achat" id="id_prix"
 						v-model="achat.prix">
 				</div>
-    			<input type="submit" name="submit" value="submit"
-    				style="align-self:flex-end;" @click="acheter">
+				<div class="submit">
+					<div class="logs">{{logs}}</div>
+					<input type="submit" value="Vendre" @click="acheter">
+				</div>
 			</form>
 		</div>
 	</div>
@@ -30,8 +32,7 @@ export default {
 	},
 	data(){
 		return {
-			payee : 0,
-			achat:{}
+			payee:0, achat:{}, logs:""
 		}
 	},
 	methods: {
@@ -50,7 +51,11 @@ export default {
 			.then((response) => {
 				this.produit.quantite += response.data.quantite;
 			}).catch((error) => {
-				console.error(error);
+				if (!!error.response) {
+					this.logs = error.response.data.status
+				} else {
+					this.logs = "une erreur est survenue";
+				}
 			});
 		}
 	}

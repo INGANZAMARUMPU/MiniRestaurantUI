@@ -16,7 +16,10 @@
 						<option value="perimé">perimé</option>
 					</select>
 				</div>
-    			<input type="submit" name="submit" value="submit" style="align-self:flex-end;">
+				<div class="submit">
+					<div class="logs">{{logs}}</div>
+					<input type="submit" value="Diminuer" @click="">
+				</div>
 			</form>
 		</div>
 	</div>
@@ -30,7 +33,7 @@ export default {
 	},
 	data(){
 		return {
-			payee : 0,
+			payee : 0, logs:""
 		}
 	},
 	methods: {

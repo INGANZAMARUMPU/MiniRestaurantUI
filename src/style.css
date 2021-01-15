@@ -111,5 +111,10 @@ td{
 	font-weight: bold;
 	text-align:  center;
 }
+.submit{
+	display: flex;
+	justify-content: space-between;
+	margin: 0 !important;
+}
 @media screen and (max-width: 650px){
 }

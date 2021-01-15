@@ -13,8 +13,10 @@
 				<div>la somme à rendre est <b>
 					{{ payee - commande.a_payer }}
 				</b></div>
-				<input type="submit" name="payer"
-					style="align-self:flex-end;" @click="performPayment">
+				<div class="submit">
+					<div class="logs">{{logs}}</div>
+					<input type="submit" value="Diminuer" @click="performPayment">
+				</div>
 			</form>
 		</div>
 	</div>
@@ -28,7 +30,7 @@ export default {
 	},
 	data(){
 		return {
-			payee : 0,
+			payee : 0, logs:""
 		}
 	},
 	computed:{
@@ -55,7 +57,11 @@ export default {
 				this.commande.payee += parseInt(this.payee);
 				this.close()
 			}).catch((error) => {
-				console.error(error);
+				if (!!error.response) {
+					this.logs = error.response.data.status
+				} else {
+					this.logs = "une erreur est survenue";
+				}
 			});
 
 		}
