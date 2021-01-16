@@ -34,12 +34,20 @@
 					</tr>
 				</tfoot>
 			</table>
+			<form v-if="dette_enabled">
+				<div class="field">
+					<label for="">nom</label>
+					<input type="text" name="">
+				</div>
+				<div class="field">
+					<label for="">Telephone</label>
+					<input type="text" name="">
+				</div>
+			</form>
 			<label style="color:red" v-if="erreur!=''">{{ erreur }}</label>
-			<div class="btns-valider">
-				<button style="margin-right:3px" @click="validerCommande">
-					valider
-				</button>
-				<button>valider et imprimer</button>
+			<div class="btns">
+				<button @click="dette_enabled=true">dette</button>
+				<button>valider</button>
 			</div>
 		</div>
 	</div>
@@ -53,7 +61,7 @@ export default {
 	data () {
 		return {
 			cart : this.$store.state.cart,
-			erreur : "",
+			erreur : "", dette_enabled:false,
 		}
 	},
 	methods: {
@@ -113,5 +121,13 @@ export default {
 	}
 };
 </script>
-<style>
+<style scoped>
+.btns {
+	display: flex;
+	justify-content: flex-end;
+}
+.field{
+	display: inline-block;
+	width: 49%;
+}
 </style>
