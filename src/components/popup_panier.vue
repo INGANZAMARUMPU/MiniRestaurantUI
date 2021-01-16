@@ -5,19 +5,16 @@
 				<caption class="title">Panier</caption>
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>price</th>
-						<th>quantity</th>
-						<th>total</th>
-						<th></th>
-						<th></th>
+						<th>Name</th><th>price</th>
+						<th>quantity</th><th>total</th>
+						<th></th><th></th>
 					</tr>
 				</thead>
 				<tbody class=".popup-content">
 					<tr v-for="item in cart.content" v-if="item.quantite>0">
 						<td>{{item.recette.nom}}</td>
 						<td>{{item.recette.prix}}</td>
-						<td>{{item.quantite}}</td>
+						<td>x {{item.quantite}}</td>
 						<td>{{item.getTotal()}}</td>
 						<td><button class="panier_moins" @click="decreaseQtt(item)">-</button></td>
 						<td><button class="panier_plus" @click="increaseQtt(item)">+</button></td>
@@ -25,29 +22,15 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td>total</td>
-						<td></td>
-						<td></td>
+						<td>total</td><td></td><td></td>
 						<td>{{ cart.getTotal() }}</td>
-						<td></td>
-						<td></td>
+						<td></td><td></td>
 					</tr>
 				</tfoot>
 			</table>
-			<form v-if="dette_enabled">
-				<div class="field">
-					<label for="">nom</label>
-					<input type="text" name="">
-				</div>
-				<div class="field">
-					<label for="">Telephone</label>
-					<input type="text" name="">
-				</div>
-			</form>
 			<label style="color:red" v-if="erreur!=''">{{ erreur }}</label>
 			<div class="btns">
-				<button @click="dette_enabled=true">dette</button>
-				<button>valider</button>
+				<button @click="validerCommande">Payer</button>
 			</div>
 		</div>
 	</div>
@@ -60,8 +43,8 @@ export default {
 	},
 	data () {
 		return {
-			cart : this.$store.state.cart,
-			erreur : "", dette_enabled:false,
+			cart : this.$store.state.cart, erreur:"",
+			dette_enabled:false, client:{}
 		}
 	},
 	methods: {
@@ -84,39 +67,30 @@ export default {
 			let commande = {
 				"table": this.$store.state.selected_table.id,
 				"serveur": this.$store.state.selected_serveur.id,
-				"personnel": this.$store.state.user.id
+				"items":[],
+				"reste":this.cart.getTotal(), "payee":0
 			};
-			axios.post(
-				this.$store.state.host+"/commande/",
-					commande, headers
-				).then((response) => {
-					commande = response.data;
-					for(var i = 0; i < this.cart.getLength(); i++){
-						let item = this.cart.content[i];
-						let details_commande = {
-							"commande": commande.id,
-							"recette": item.recette.id,
-							"quantite": item.quantite
-						};
-						axios.post(
-							this.$store.state.host+"/detail_commande/",
-							details_commande, headers
-						).then((response) => {
-							details_commande = response.data;
-							commande.details.push(details_commande);
-							commande.a_payer += details_commande.somme;
-							this.$store.state.cart.content = []
-							this.$emit("close", null);
-							this.erreur = "";
-						}).catch((error) => {
-							this.erreur = error;
-							return;
-						});
-					}
-					this.$store.state.commandes.unshift(commande);
-				}).catch((error) => {
-					console.error(error);
-				});
+			for(var i = 0; i < this.cart.getLength(); i++){
+				let item = this.cart.content[i];
+				let details_commande = {
+					"recette": item.recette.id,
+					"quantite": item.quantite,
+					"somme": item.getTotal()
+				};
+				commande.items.push(details_commande);
+			}
+			axios.post(this.$store.state.host+"/commande/",commande,headers)
+			.then((response) => {
+				this.$store.state.commandes.push(response.data);
+				this.$store.state.cart.content=[];
+				this.close();
+			}).catch((error) => {
+				if (!!error.response) {
+					this.logs = error.response.data.status
+				} else {
+					this.logs = "une erreur est survenue";
+				}
+			});
 		}
 	}
 };

@@ -13,9 +13,17 @@
 				<div>la somme à rendre est <b>
 					{{ payee - commande.a_payer }}
 				</b></div>
+				<div class="field">
+					<label for="">nom :</label>
+					<input type="text" name="">
+				</div>
+				<div class="field">
+					<label for="">Telephone :</label>
+					<input type="text" name="">
+				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
-					<input type="submit" value="Diminuer" @click="performPayment">
+					<input type="submit" value="Payer" @click="performPayment">
 				</div>
 			</form>
 		</div>
@@ -36,6 +44,9 @@ export default {
 	computed:{
 		host(){
 			return this.$store.state.host
+		},
+		dette_enabled(){
+			return this.commande.a_payer>this.payee
 		}
 	},
 	methods: {

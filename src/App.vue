@@ -48,6 +48,7 @@ export default {
       this.$store.state.recettes = state.recettes; 
       this.$store.state.tables = state.tables;
       this.user = state.user;
+      this.$router.push('/')
     } else {
       console.warn("il y'a pas de session");
     }
