@@ -12,7 +12,6 @@
 </div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	props: {
 		serveur: { type : Object, required:true}

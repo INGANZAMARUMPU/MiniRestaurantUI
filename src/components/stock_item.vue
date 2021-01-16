@@ -9,7 +9,6 @@
 	</div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	props: {
 		produit: { type : Object, required: true}

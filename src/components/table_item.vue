@@ -10,7 +10,6 @@
 	</div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	props: {
 		table: { type : Object, required:true },

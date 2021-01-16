@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import EVENT_BUS from "../main";
 import SearchBar from "../components/search";
 import TableItem from "../components/table_item";
 
@@ -39,5 +38,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-</style>

@@ -16,7 +16,6 @@
 	</div>
 </template>
 <script >
-import EVENT_BUS from '../main'
 export default {
 	props: {
 		recette:{type:Object, required:true}

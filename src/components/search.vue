@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import EVENT_BUS from '../main'
 export default {
 	data(){
 		return {
