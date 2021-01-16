@@ -2,6 +2,7 @@
   <div id="app">
     <search-bar  @changed="search"/>
     <div class="recycler">
+      <button class="big">+</button>
       <TableItem v-for="table in tables" :table="table"/>
     </div>
   </div>
@@ -38,3 +39,5 @@ export default {
   }
 };
 </script>
+<style scoped>
+</style>

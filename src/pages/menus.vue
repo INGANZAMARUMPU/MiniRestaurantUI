@@ -2,6 +2,7 @@
   <div id="app" @click="popover_opened=false">
     <search-bar @changed="search"/>
     <div class="recycler">
+      <button class="big">+</button>
       <RestoMenu v-for="recette in recettes" :recette="recette"/>
     </div>
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">

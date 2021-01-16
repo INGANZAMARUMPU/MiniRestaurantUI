@@ -116,5 +116,16 @@ td{
 	justify-content: space-between;
 	margin: 0 !important;
 }
+.big {
+	align-self:center;
+	height:50px; 
+	width:50px; 
+	font-size: 3em;
+	align-content: center;
+	padding: 0;
+}
+.big:hover {
+	background-color: #279;
+}
 @media screen and (max-width: 650px){
 }

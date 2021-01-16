@@ -2,6 +2,7 @@
   <div id="app">
     <SearchBar @changed="search"/>
     <div class="recycler">
+      <button class="big">+</button>
       <resto-person v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
       <!-- <resto-person v-for="serveur in serveurs" :serveur="serveur"/> -->
     </div>
