@@ -79,21 +79,21 @@ export default {
           "Authorization": "Bearer " + this.user.access
         }
       }
-      axios.get('http://127.0.0.1:8000/serveur/', headers)
+      axios.get(this.host+'/serveur/', headers)
         .then((response) => {
           this.$store.state.serveurs = response.data;
         }).catch((error) => {
           console.error(error);
         });
 
-      axios.get('http://127.0.0.1:8000/table/', headers)
+      axios.get(this.host+'/table/', headers)
         .then((response) => {
           this.$store.state.tables = response.data;
         }).catch((error) => {
           console.error(error);
         });
 
-      axios.get('http://127.0.0.1:8000/recette/', headers)
+      axios.get(this.host+'/recette/', headers)
         .then((response) => {
           this.$store.state.recettes = response.data;
         }).catch((error) => {
