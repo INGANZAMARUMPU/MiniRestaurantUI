@@ -13,9 +13,9 @@
               <th>id</th>
               <th>table</th>
               <th>serveur</th>
-              <th>somme</th>
-              <th>payée</th>
-              <th>Reste</th>
+              <th class="right">somme</th>
+              <th class="right">payée</th>
+              <th class="right">Reste</th>
               <th>Date</th>
               <th><button onclick="toggleTableSize(event)">toggle display</button></th>
             </tr>
@@ -25,10 +25,10 @@
                 <td>#{{ commande.id }}</td>
                 <td>Table {{ commande.table }}</td>
                 <td>{{ commande.serveur_name }}</td>
-                <td>{{ commande.a_payer }}</td>
-                <td>{{ commande.payee }}</td>
-                <td>{{ commande.reste }}</td>
-                <td>{{ commande.date }}</td>
+                <td class="right">{{ money(commande.a_payer) }}</td>
+                <td class="right">{{ money(commande.payee) }}</td>
+                <td class="right">{{ money(commande.reste) }}</td>
+                <td class="time">{{ datetime(commande.date)}}</td>
                 <td>
                   <div class="btns">
                     <button @click="showDetails(commande)">
@@ -44,9 +44,9 @@
           <tfoot>
             <tr class="panier-item">
               <th colspan="3">total</th>
-              <th>{{ totals.a_payer }}</th>
-              <th>{{ totals.payee }}</th>
-              <th>{{ totals.reste }}</th>
+              <th class="right">{{ money(totals.a_payer) }}</th>
+              <th class="right">{{ money(totals.payee) }}</th>
+              <th class="right">{{ money(totals.reste) }}</th>
               <th></th>
               <th></th>
             </tr>
@@ -161,6 +161,12 @@ export default {
 .scrollable-tab table tfoot tr th{
   position: sticky;
   bottom: 0;
+}
+.right{
+  text-align: right;
+}
+th, td{
+  text-align: center;
 }
 @media screen and (max-width: 650px){
   .scrollable-tab{

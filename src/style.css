@@ -63,9 +63,6 @@ tr th{
 tr:nth-child(even) {
   background-color: #eee;
 }
-td{
-	padding-right: 10px;
-}
 .table button, .table .btn{
 	padding: 3px 1em;
 }
@@ -80,6 +77,7 @@ td{
 	border-bottom: 1px solid #aaa;
 	text-align: left;
 	height: 30px;
+	padding-right: 10px;
 }
 .popup{
 	position: fixed;
@@ -126,6 +124,10 @@ td{
 }
 .big:hover {
 	background-color: #279;
+}
+.time{
+  font-family: monospace;
+  font-size: 1.2em;
 }
 @media screen and (max-width: 650px){
 }

@@ -15,7 +15,7 @@
 						<td>{{item.recette.nom}}</td>
 						<td>{{item.recette.prix}}</td>
 						<td>x {{item.quantite}}</td>
-						<td>{{item.getTotal()}}</td>
+						<td>{{money(item.getTotal())}}</td>
 						<td><button class="panier_moins" @click="decreaseQtt(item)">-</button></td>
 						<td><button class="panier_plus" @click="increaseQtt(item)">+</button></td>
 					</tr>
@@ -23,7 +23,7 @@
 				<tfoot>
 					<tr>
 						<td>total</td><td></td><td></td>
-						<td>{{ cart.getTotal() }}</td>
+						<td>{{ money(cart.getTotal()) }}</td>
 						<td></td><td></td>
 					</tr>
 				</tfoot>

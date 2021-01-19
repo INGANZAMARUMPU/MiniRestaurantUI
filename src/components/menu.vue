@@ -5,7 +5,7 @@
 		</div>
 		<div class="title">
 			<span class="name">{{ recette.nom }}</span>
-			<span class="prix">{{ recette.prix }}</span>
+			<span class="prix"> {{ money(recette.prix) }}</span>
 			Fbu
 		</div>
 		<div class="buttons">
