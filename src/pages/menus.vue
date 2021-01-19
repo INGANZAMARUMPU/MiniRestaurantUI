@@ -1,9 +1,15 @@
 <template>
-  <div id="app" @click="popover_opened=false">
+  <div id="app" @click="hideEverything()">
+    <div class="context" ref="context" style="display:none" 
+      :class="{'visible':context_shown}">
+      <div class="">desactiver</div>
+      <div class="">modifier</div>
+    </div>
     <search-bar @changed="search"/>
     <div class="recycler">
       <button class="big">+</button>
-      <RestoMenu v-for="recette in recettes" :recette="recette"/>
+      <RestoMenu v-for="recette in recettes" :recette="recette"
+         @contextmenu="showContext"/>
     </div>
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
         panier ({{cart.getLength()}})
@@ -24,7 +30,7 @@ export default {
     return{
       recettes: this.$store.state.recettes,
       cart : this.$store.state.cart,
-      popover_opened:false
+      popover_opened:false,context_shown:false
     }
   },
   methods:{
@@ -41,10 +47,23 @@ export default {
         }
       }
     },
+    showContext(data){
+      this.context_shown = true;
+      let context = this.$refs.context;
+      context.style.left = data.event.clientX+"px";
+      context.style.top = data.event.clientY+"px";
+    },
+    hideEverything(){
+      this.popover_opened = false;
+      this.context_shown = false;
+    }
   }
 };
 </script>
 <style scoped>
+.visible{
+  display: block!important;
+}
 .btn-panier{
   border-radius: 0 5px 5px 0;
   position: fixed;

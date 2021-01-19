@@ -129,5 +129,18 @@ tr:nth-child(even) {
   font-family: monospace;
   font-size: 1.2em;
 }
+.context{
+	box-shadow: 2px 2px 5px black;
+	position: absolute;
+	z-index: 5;
+	background: #eee;
+	cursor: context-menu;
+}
+.context *{
+	padding: 5px 10px;
+}
+.context *:hover{
+	background: #ddd;
+}
 @media screen and (max-width: 650px){
 }

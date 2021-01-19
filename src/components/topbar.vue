@@ -16,17 +16,6 @@
 					<router-link to="stat_service">Service</router-link>
 				</div>
 			</li>
-			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"
-				@mouseleave="e => hideSubmenu(e)">
-				<router-link to="">Gestion</router-link>
-				<div class="submenu">
-				   <a target="blank" href="#">Tables</a>
-				   <a target="blank" href="#">Stock</a>
-				   <a target="blank" href="#">Produit</a>
-				   <a target="blank" href="#">Recette</a>
-				   <a target="blank" href="#">Serveur</a>
-				</div>
-			</li>
 		</ul>
 	</div>
 </template>
@@ -59,6 +48,8 @@ export default {
 }
 a{
 	color: white;
+	display: block;
+	width: 100%;
 }
 ul{
 	background-color: #007799;
@@ -76,7 +67,8 @@ li{
 	display: none;
 	position: absolute;
 	background-color: #007799;
-	right: 0;
+	width: -moz-available;
+	width: -webkit-fill-available;
 }
 .submenu a{
 	display: block;

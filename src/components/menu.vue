@@ -1,5 +1,6 @@
 <template>
-	<div class="parent" :data-id='recette.id'>
+	<div class="parent" :data-id='recette.id'
+		@contextmenu.prevent="e => emitContext(e)">
 		<div class="img food-img">
 			<img :src="getIcon(recette)" height="112px" style="margin:5px" />
 		</div>
@@ -37,6 +38,11 @@ export default {
 		},
 		decreaseQtt : function(){
 			this.cart.decrease(this.recette.id);
+		},
+		emitContext(e){
+			this.$emit("contextmenu", {
+				"event":e, "recette":this.recette
+			});
 		}
 	},
 	computed:{
