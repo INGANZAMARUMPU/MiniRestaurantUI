@@ -3,9 +3,9 @@
     <search-bar  @changed="search"/>
     <div class="recycler">
       <button class="big" @click="dialog_shown=true;table=null">+</button>
-      <TableItem v-for="table in tables" :table="table"/>
+      <TableItem v-for="table in tables" :table="table" @edit="editTable"/>
     </div>
-    <TableDialog :table="table" :visible="dialog_shown"/>
+    <TableDialog :table="table" :visible="dialog_shown" @close="dialog_shown=false"/>
   </div>
 </template>
 
@@ -42,6 +42,10 @@ export default {
         }
       }
     },
+    editTable(table){
+      this.table = table;
+      this.dialog_shown=true;
+    }
   }
 };
 </script>

@@ -15,7 +15,7 @@
 				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
-					<input type="submit" value="Ajouter" @click="submit">
+					<input type="submit" value="Envoyer" @click="submit">
 				</div>
 			</form>
 		</div>
@@ -36,15 +36,25 @@ export default {
 			return this.$store.state.host;
 		}
 	},
+	watch:{
+		table(new_value){
+			if(!new_value){
+				this.nom = ""; this.number="";
+				return;
+			}
+			this.nom = new_value.nom;
+			this.number = new_value.number;
+		}
+	},
 	methods: {
 		close(){
 			this.$emit("close")
 		},
 		submit(){
 			if(!!this.table){
-				editTable()
+				this.editTable();
 			}else{
-				addTable()
+				this.addTable();
 			}
 		},
 		editTable(){
@@ -53,11 +63,12 @@ export default {
 				"Authorization": "Bearer " + this.$store.state.user.access
 				}
 			}
-			data = { nom : this.nom, number : this.number};
-			axios.put(this.host+`/table/$(this.table.id)/`,this.data, headers)
+			let data = { nom : this.nom, number : this.number};
+			axios.put(this.host+`/table/${this.table.id}/`,data, headers)
 			.then((response) => {
 				this.table.nom = response.data.nom;
 				this.table.number = response.data.number;
+				this.close();
 			}).catch((error) => {
 				if (!!error.response) {
 					this.logs = error.response.data.status
@@ -72,10 +83,11 @@ export default {
 				"Authorization": "Bearer " + this.$store.state.user.access
 				}
 			}
-			data = { nom : this.nom, number : this.number};
+			let data = { nom : this.nom, number : this.number};
 			axios.post(this.host+"/table/",data, headers)
 			.then((response) => {
 				this.$store.state.tables.unshift(response.data);
+				this.close();
 			}).catch((error) => {
 				if (!!error.response) {
 					this.logs = error.response.data.status

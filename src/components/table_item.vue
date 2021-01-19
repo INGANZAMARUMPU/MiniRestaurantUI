@@ -1,11 +1,13 @@
 <template>
-	<div class="parent">
-		<div class="title">Table {{ table.number }}</div>
+	<div class="parent" @click="gotoServeurs">
+		<div class="title">{{ table.nom }} {{ table.number }}</div>
 		<div class="buttons">
-			<button @click="gotoServeurs">
-				+Commande
+			<button @click.stop="edit">
+				modifier
 			</button>
-			<button>Payer</button>
+			<button @click.stop>
+				Payer
+			</button>
 		</div>
 	</div>
 </template>
@@ -18,6 +20,9 @@ export default {
 		gotoServeurs(){
 			this.$store.state.selected_table = this.table;
 			this.$router.push('serveurs')
+		},
+		edit(){
+			this.$emit("edit", this.table);
 		}
 	}
 };
