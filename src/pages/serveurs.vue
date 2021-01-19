@@ -2,23 +2,25 @@
   <div id="app">
     <SearchBar @changed="search"/>
     <div class="recycler">
-      <button class="big">+</button>
-      <resto-person v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
-      <!-- <resto-person v-for="serveur in serveurs" :serveur="serveur"/> -->
+      <button class="big" @click="dialog_shown=true">+</button>
+      <ItemServeur v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
     </div>
+    <DialogServeur :visible="dialog_shown" @close="closeDialog" :serveur="serveur"/>
   </div>
 </template>
 
 <script>
 import { EVENT_BUS } from "../main";
 import SearchBar from "../components/search";
-import person from "../components/person";
+import ItemServeur from "../components/person";
+import DialogServeur from "../components/popup_serveur";
 
 export default {
-  components:{ SearchBar, restoPerson:person },
+  components:{ SearchBar, ItemServeur, DialogServeur },
   data () {
     return{
       serveurs: this.$store.state.serveurs,
+      dialog_shown: false, serveur:null
     }
   },
   methods: {
@@ -35,6 +37,10 @@ export default {
         }
       }
     },
+    closeDialog(){
+      this.serveur=null;
+      this.dialog_shown=false;
+    }
   }
 };
 </script>
