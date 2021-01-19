@@ -7,15 +7,17 @@
     </div>
     <search-bar @changed="search"/>
     <div class="recycler">
-      <button class="big">+</button>
+      <button class="big" @click.stop="menu_opened=true">+</button>
       <RestoMenu v-for="recette in recettes" :recette="recette"
          @contextmenu="showContext"/>
     </div>
-    <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="popover_opened=true">
+    <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="panier_opened=true">
         panier ({{cart.getLength()}})
     </button>
-    <CartDialog :visible='popover_opened' :cart='cart'
-      @close="popover_opened=false"/>
+    <CartDialog :visible='panier_opened' :cart='cart'
+      @close="hideEverything"/>
+    <MenuDialog :visible='menu_opened' :cart='cart'
+      @close="hideEverything"/>
   </div>
 </template>
 
@@ -23,14 +25,16 @@
 import searchbar from "../components/search";
 import RestoMenu from "../components/menu";
 import CartDialog from "../components/popup_panier";
+import MenuDialog from "../components/popup_menu";
 
 export default {
-  components:{ searchBar: searchbar, RestoMenu, CartDialog },
+  components:{ searchBar: searchbar, RestoMenu, CartDialog, MenuDialog},
   data () {
     return{
       recettes: this.$store.state.recettes,
       cart : this.$store.state.cart,
-      popover_opened:false,context_shown:false
+      panier_opened:false,context_shown:false,
+      menu_opened:false,menu:false
     }
   },
   methods:{
@@ -54,8 +58,10 @@ export default {
       context.style.top = data.event.clientY+"px";
     },
     hideEverything(){
-      this.popover_opened = false;
+      this.panier_opened = false;
+      this.menu_opened = false;
       this.context_shown = false;
+      this.menu=false;
     }
   }
 };
