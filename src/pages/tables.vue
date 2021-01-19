@@ -2,25 +2,31 @@
   <div id="app">
     <search-bar  @changed="search"/>
     <div class="recycler">
-      <button class="big">+</button>
+      <button class="big" @click="dialog_shown=true;table=null">+</button>
       <TableItem v-for="table in tables" :table="table"/>
     </div>
+    <TableDialog :table="table" :visible="dialog_shown"/>
   </div>
 </template>
 
 <script>
 import SearchBar from "../components/search";
 import TableItem from "../components/table_item";
+import TableDialog from "../components/popup_table";
 
 export default {
-  components:{ SearchBar, TableItem },
+  components:{ SearchBar, TableItem, TableDialog},
   data () {
     return{
-      tables : []
+      tables : this.$store.state.tables,
+      dialog_shown : false,
+      table : null,
     }
   },
-  mounted(){
-    this.tables = this.$store.state.tables;
+  watch:{
+    "$store.state.tables"(new_val){
+      this.tables = new_val;
+    }
   },
   methods:{
     search(string){

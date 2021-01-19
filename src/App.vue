@@ -48,7 +48,6 @@ export default {
       this.$store.state.recettes = state.recettes; 
       this.$store.state.tables = state.tables;
       this.user = state.user;
-      this.$router.push('/')
     } else {
       console.warn("il y'a pas de session");
     }
@@ -71,6 +70,9 @@ export default {
     logout(){
       localStorage.setItem('state', null);
       this.$store.state.user = null;
+      this.$store.state.serveurs = null;
+      this.$store.state.recettes = null;
+      this.$store.state.tables = null;
       this.user = null;
     },
     fetchData(){
