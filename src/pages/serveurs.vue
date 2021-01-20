@@ -1,15 +1,20 @@
 <template>
-  <div id="app">
+  <div @click="hideEverything()">
     <SearchBar @changed="search"/>
+    <div class="context" ref="context" style="display:none" 
+      :class="{'visible':context_shown}">
+      <div class="">desactiver</div>
+      <div class="">modifier</div>
+    </div>
     <div class="recycler">
       <div class="serveur_size">
         <button class="big" @click="dialog_shown=true">
           +
         </button>
       </div>
-      <ItemServeur v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
+      <ItemServeur v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table" @contextmenu="showContext"/>
     </div>
-    <DialogServeur :visible="dialog_shown" @close="closeDialog" :serveur="serveur"/>
+    <DialogServeur :visible="dialog_shown" @close="hideEverything" :serveur="serveur"/>
   </div>
 </template>
 
@@ -24,7 +29,8 @@ export default {
   data () {
     return{
       serveurs: this.$store.state.serveurs,
-      dialog_shown: false, serveur:null
+      dialog_shown: false, serveur:null,
+      context_shown:false,
     }
   },
   methods: {
@@ -41,14 +47,25 @@ export default {
         }
       }
     },
-    closeDialog(){
+    hideEverything(){
       this.serveur=null;
       this.dialog_shown=false;
-    }
+      this.context_shown = false;
+      this.menu=false;
+    },
+    showContext(data){
+      this.context_shown = true;
+      let context = this.$refs.context;
+      context.style.left = data.event.clientX+"px";
+      context.style.top = data.event.clientY+"px";
+    },
   }
 };
 </script>
 <style>
+.visible{
+  display: block!important;
+}
 .serveur_size{
   display: flex;
   justify-content: center;

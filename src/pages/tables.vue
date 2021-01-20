@@ -39,7 +39,7 @@ export default {
       this.tables = [];
       for(var i = 0; i < this.$store.state.tables.length; i++){
         let table = this.$store.state.tables[i];
-        if (table.id == string ) {
+        if (table.nom.includes(string)||table.number==string){
           this.tables.push(table);
         }
       }

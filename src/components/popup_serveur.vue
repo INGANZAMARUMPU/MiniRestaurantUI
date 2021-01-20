@@ -80,13 +80,13 @@ export default {
 				"Content-Type": "multipart/form-data"
 				}
 			}
-			let formData = new FormData();
-			formData.append('avatar', this.avatar);
-			formData.append('firstname', this.new_serveur.firstname);
-			formData.append('lastname', this.new_serveur.lastname);
-			formData.append('tel', this.new_serveur.tel);
+			let form_data = new FormData();
+			form_data.append('avatar', this.avatar);
+			form_data.append('firstname', this.new_serveur.firstname);
+			form_data.append('lastname', this.new_serveur.lastname);
+			form_data.append('tel', this.new_serveur.tel);
 
-			axios.post(this.host+"/serveur/", formData, headers)
+			axios.post(this.host+"/serveur/", form_data, headers)
 			.then((response) => {
 				this.$store.state.serveurs.push(response.data);
 				this.close();
