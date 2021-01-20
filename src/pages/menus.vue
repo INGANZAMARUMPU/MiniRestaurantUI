@@ -38,7 +38,7 @@ export default {
       recettes: this.$store.state.recettes,
       cart : this.$store.state.cart,
       panier_opened:false,context_shown:false,
-      menu_opened:false,menu:false
+      menu_opened:false, menu:null
     }
   },
   methods:{

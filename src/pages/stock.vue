@@ -2,6 +2,11 @@
   <div id="app">
     <SearchBar @changed="search"/>
     <div class="recycler">
+      <div class="product_size">
+        <button class="big" @click.stop="product_poped_up=true">
+          +
+        </button>
+      </div>
       <StockItem v-for="produit in stocks" :produit="produit"
         @out="decreaseStock(produit)" @in="increaseStock(produit)"/>
     </div>
@@ -9,6 +14,8 @@
       @close="out_dialog_opened=false"/>
     <InDialog :visible='in_dialog_opened' :produit='produit'
       @close="in_dialog_opened=false"/>
+    <ProductDialog :visible='product_poped_up' :produit='produit'
+      @close="product_poped_up=false"/>
   </div>
 </template>
 
@@ -18,14 +25,16 @@ import SearchBar from "../components/search";
 import StockItem from "../components/stock_item";
 import OutDialog from "../components/popup_stock_out";
 import InDialog from "../components/popup_stock_in";
+import ProductDialog from "../components/popup_product";
 
 export default {
-  components:{ StockItem, SearchBar, OutDialog, InDialog},
+  components:{ StockItem, SearchBar, OutDialog, InDialog, ProductDialog},
   data(){
     return{
       stocks : [],
       out_dialog_opened:false,
       in_dialog_opened:false,
+      product_poped_up:false,
       produit :{
         "id": 0, "unite_sortant": "","rapport": 0,
         "quantite": 0,"nom": "", "unite": ""
@@ -76,3 +85,15 @@ export default {
   }
 };
 </script>
+<style scoped>
+.product_size{
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0088aa;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 3px;
+}
+</style>
