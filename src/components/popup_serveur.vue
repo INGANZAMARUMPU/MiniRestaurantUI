@@ -45,7 +45,7 @@ export default {
 	watch:{
 		serveur(new_val){
 			if(!!new_val){
-				this.new_serveur = serveur;
+				this.new_serveur = new_val;
 			} else{
 				this.new_serveur = {};
 			}

@@ -3,16 +3,22 @@
     <SearchBar @changed="search"/>
     <div class="context" ref="context" style="display:none" 
       :class="{'visible':context_shown}">
-      <div class="">desactiver</div>
+      <div class="" @click="changeStatus" v-if="serveurActif">desactiver</div>
+      <div class="" @click="changeStatus" v-else>activer</div>
       <div class="">modifier</div>
     </div>
     <div class="recycler">
       <div class="serveur_size">
-        <button class="big" @click="dialog_shown=true">
+        <button class="big" @click.stop="dialog_shown=true">
           +
         </button>
       </div>
-      <ItemServeur v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table" @contextmenu="showContext"/>
+      <ItemServeur
+        v-for="serveur in serveurs"
+        :serveur="serveur"
+        :id_table="$route.params.id_table"
+        @contextmenu="showContext"
+      />
     </div>
     <DialogServeur :visible="dialog_shown" @close="hideEverything" :serveur="serveur"/>
   </div>
@@ -31,6 +37,11 @@ export default {
       serveurs: this.$store.state.serveurs,
       dialog_shown: false, serveur:null,
       context_shown:false,
+    }
+  },
+  computed:{
+    serveurActif(){
+      return !!this.serveur && this.serveur.is_active
     }
   },
   methods: {
@@ -58,7 +69,11 @@ export default {
       let context = this.$refs.context;
       context.style.left = data.event.clientX+"px";
       context.style.top = data.event.clientY+"px";
+      this.serveur = data.serveur;
     },
+    changeStatus(){
+      this.serveur.is_active = !this.serveur.is_active
+    }
   }
 };
 </script>

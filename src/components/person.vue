@@ -1,6 +1,7 @@
 <template>
 <div class="user-card" @click="gotoMenus"
-	@contextmenu.prevent="e => emitContext(e)">
+	@contextmenu.prevent="e => emitContext(e)"
+	:class="{disabled:!serveur.is_active}">
 	<div class="img-user">
 		<img :src='getAvatar(serveur)' alt="">
 	</div>
@@ -25,12 +26,14 @@ export default {
 			return serveur.avatar;
 		},
 		gotoMenus(){
-			this.$store.state.selected_serveur = this.serveur;
-			this.$router.push('menus');
+			if(this.serveur.is_active){
+				this.$store.state.selected_serveur = this.serveur;
+				this.$router.push('menus');
+			}
 		},
 		emitContext(e){
 			this.$emit("contextmenu", {
-				"event":e, "recette":this.recette
+				"event":e, "serveur":this.serveur
 			});
 		}
 	}
