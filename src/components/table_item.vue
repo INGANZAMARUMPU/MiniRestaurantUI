@@ -38,6 +38,7 @@ export default {
     margin: 3px;
     width: 200px;
 	text-align: center;
+	cursor: pointer;
 }
 .title{
 	font-size: 1.3em;
