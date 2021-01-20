@@ -2,7 +2,11 @@
   <div id="app">
     <SearchBar @changed="search"/>
     <div class="recycler">
-      <button class="big" @click="dialog_shown=true">+</button>
+      <div class="serveur_size">
+        <button class="big" @click="dialog_shown=true">
+          +
+        </button>
+      </div>
       <ItemServeur v-for="serveur in serveurs" :serveur="serveur" :id_table="$route.params.id_table"/>
     </div>
     <DialogServeur :visible="dialog_shown" @close="closeDialog" :serveur="serveur"/>
@@ -44,3 +48,15 @@ export default {
   }
 };
 </script>
+<style>
+.serveur_size{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0088aa;
+  border-radius: 5px;
+  width: 140px;
+  padding: 10px 5px;
+  margin: 10px;
+}
+</style>

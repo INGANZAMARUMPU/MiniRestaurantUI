@@ -42,10 +42,19 @@ export default {
 			return this.$store.state.host;
 		}
 	},
+	watch:{
+		serveur(new_val){
+			if(!!new_val){
+				this.new_serveur = serveur;
+			} else{
+				this.new_serveur = {};
+			}
+		}
+	},
 	data(){
 		return {
 			logs:"", avatar:null,
-			new_serveur:{ firstname:"", lastname:"", tel:""}
+			new_serveur:{}
 		}
 	},
 	methods: {
@@ -56,6 +65,15 @@ export default {
 			this.avatar = this.$refs.avatar.files[0];
 		},
 		submit(){
+			if(!!serveur){
+				this.updateServeur();
+			}else{
+				this.addServeur()
+			}
+		},
+		updateServeur(){
+		},
+		addServeur(){
 			let headers = {
 				headers: {
 				"Authorization": "Bearer " + this.$store.state.user.access,

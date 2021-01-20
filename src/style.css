@@ -46,6 +46,7 @@ input[type=submit], button{
 .recycler{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .logout{
   border-radius: 5px 0 0 5px;
@@ -118,6 +119,8 @@ tr:nth-child(even) {
 	align-self:center;
 	height:50px; 
 	width:50px; 
+	min-height:50px; 
+	min-width:50px; 
 	font-size: 3em;
 	align-content: center;
 	padding: 0;

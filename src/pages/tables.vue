@@ -2,7 +2,9 @@
   <div id="app">
     <search-bar  @changed="search"/>
     <div class="recycler">
-      <button class="big" @click="dialog_shown=true;table=null">+</button>
+      <div class="table_size">
+        <button class="big" @click="dialog_shown=true;table=null">+</button>
+      </div>
       <TableItem v-for="table in tables" :table="table" @edit="editTable"/>
     </div>
     <TableDialog :table="table" :visible="dialog_shown" @close="dialog_shown=false"/>
@@ -50,4 +52,14 @@ export default {
 };
 </script>
 <style scoped>
+.table_size{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0088aa;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 3px;
+  width: 200px;
+}
 </style>

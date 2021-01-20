@@ -7,7 +7,11 @@
     </div>
     <search-bar @changed="search"/>
     <div class="recycler">
-      <button class="big" @click.stop="menu_opened=true">+</button>
+      <div class="recette_size">
+        <button class="big" @click.stop="menu_opened=true">
+          +
+        </button>
+      </div>
       <RestoMenu v-for="recette in recettes" :recette="recette"
          @contextmenu="showContext"/>
     </div>
@@ -78,5 +82,15 @@ export default {
   margin: 0;
   background-color: #955;
   z-index: 2;
+}
+.recette_size{
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #0088aa;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 3px;
 }
 </style>
