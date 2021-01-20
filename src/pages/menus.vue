@@ -2,7 +2,8 @@
   <div id="app" @click="hideEverything()">
     <div class="context" ref="context" style="display:none" 
       :class="{'visible':context_shown}">
-      <div class="">desactiver</div>
+      <div class="" @click="disableMenu" v-if="menuActive">desactiver</div>
+      <div class="" @click="disableMenu" v-else>activer</div>
       <div class="">modifier</div>
     </div>
     <search-bar @changed="search"/>
@@ -41,6 +42,11 @@ export default {
       menu_opened:false, menu:null
     }
   },
+  computed:{
+    menuActive(){
+      return !!this.menu && this.menu.is_active
+    }
+  },
   methods:{
     search(string){
       this.recettes = [];
@@ -60,6 +66,10 @@ export default {
       let context = this.$refs.context;
       context.style.left = data.event.clientX+"px";
       context.style.top = data.event.clientY+"px";
+      this.menu = data.recette;
+    },
+    disableMenu(data){
+      this.menu.is_active = !this.menu.is_active;
     },
     hideEverything(){
       this.panier_opened = false;

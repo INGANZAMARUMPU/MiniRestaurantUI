@@ -58,9 +58,9 @@ input[type=submit], button{
   background-color: #955;
   z-index: 2;
 }
-.disabled{
-	background: #ddd!important;
-	color: #999;
+.disabled, .disabled *{
+	background: #AAA!important;
+	color: #777!important;
 }
 tr th{
 	background-color: #f5f5f5;
