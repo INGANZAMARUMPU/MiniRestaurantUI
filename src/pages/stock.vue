@@ -35,10 +35,7 @@ export default {
       out_dialog_opened:false,
       in_dialog_opened:false,
       product_poped_up:false,
-      produit :{
-        "id": 0, "unite_sortant": "","rapport": 0,
-        "quantite": 0,"nom": "", "unite": ""
-      },
+      produit :null,
     }
   },
   mounted(){

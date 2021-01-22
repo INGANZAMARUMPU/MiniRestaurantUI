@@ -149,5 +149,8 @@ tr:nth-child(even) {
 .context *:hover{
 	background: #ddd;
 }
+.logs{
+	color:red;
+}
 @media screen and (max-width: 650px){
 }
