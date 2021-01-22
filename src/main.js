@@ -17,6 +17,25 @@ Vue.mixin({
     		{ dateStyle: 'short', timeStyle: 'short' }
     	).format(date)
     },
+    compress(file, width, callback){
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function(e){
+        let img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = function () {
+            let canvas = document.createElement("canvas");
+            let rapport = img.width/width;
+            canvas.width = width;
+            canvas.height = img.height/rapport;
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            let result64 = ctx.canvas.toDataURL(img, file.type);
+            callback(new File([result64], file.name));
+            URL.revokeObjectURL(file);
+        };
+      }
+    }
   },
 })
 

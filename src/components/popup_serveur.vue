@@ -15,8 +15,7 @@
 				</div>
 				<div class="field">
 					<label for="id_avatar">photo de profile:</label>
-					<input type="file" @change="chargerPhoto" name="avatar" id="id_avatar"
-						accept=".jpg,.jpeg,.png,.gif" ref="avatar">
+					<input type="file" @change="chargerPhoto" name="avatar" id="id_avatar" accept=".jpg,.jpeg,.png,.gif" ref="avatar">
 				</div>
 				<div class="field">
 					<label for="id_tel">Télephone:</label>

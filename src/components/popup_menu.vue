@@ -1,6 +1,6 @@
 <template>
 	<div :class="{popup:true, active:visible}" @click="close">
-		<div class="popup-body" @click.prevent.stop>
+		<div class="popup-body" @click.stop>
 			<center>
 				<h3>Menu</h3>
 			</center>
@@ -11,7 +11,7 @@
 				</div>
 				<div class="field">
 					<label for="id_image">Image:</label>
-					<input type="file" name="image" id="id_image">
+					<input type="file" name="image" ref="photo" id="id_image" @change="e => resizeImage(e)" accept=".png,.gif,.jpeg,.jpg">
 				</div>
 				<div class="field">
 					<label for="id_details">Details:</label>
@@ -48,6 +48,12 @@ export default {
 	methods: {
 		close(){
 			this.$emit("close")
+		},
+		resizeImage(event){
+			let image = this.$refs.photo.files[0];
+			this.compress(image, 100, function(x){
+				console.log(image);
+			});
 		}
 	}
 };
