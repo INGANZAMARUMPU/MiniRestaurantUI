@@ -7,7 +7,7 @@
 			<form method="post">
 				<div class="field">
 					<label for="id_nom">Nom:</label>
-					<input type="text" name="nom" placeholder="nom" id="id_nom">
+					<input type="text" name="nom" placeholder="nom" id="id_nom" v-model="nom">
 				</div>
 				<div class="field">
 					<label for="id_image">Image:</label>
@@ -15,19 +15,15 @@
 				</div>
 				<div class="field">
 					<label for="id_details">Details:</label>
-					<textarea placeholder="details" id="id_details"></textarea>
+					<textarea placeholder="details" id="id_details" v-model="details"></textarea>
 				</div>
 				<div class="field">
 					<label for="id_prix">Prix:</label>
-					<input type="number" name="prix" placeholder="prix" id="id_prix">
-				</div>
-				<div class="field">
-					<label for="id_produit">Produit:</label>
-					<input type="text" name="produit" placeholder="produit" id="id_produit">
+					<input type="number" name="prix" placeholder="prix" id="id_prix" v-model="prix">
 				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
-					<input type="submit" value="Envoyer" @click="">
+					<input type="submit" value="Envoyer" @click.prevent="createRecette">
 				</div>
 			</form>
 		</div>
@@ -42,7 +38,20 @@ export default {
 	},
 	data(){
 		return {
-			logs:""
+			logs:"", nom:"", image:"", details:"",prix:"",
+		}
+	},
+	computed:{
+		headers(){
+			return {
+				headers: {
+					"Authorization": "Bearer " + this.$store.state.user.access,
+					"Content-Type": "multipart/form-data"
+				}
+			}
+		},
+		host(){
+			return this.$store.state.host
 		}
 	},
 	methods: {
@@ -51,9 +60,24 @@ export default {
 		},
 		resizeImage(event){
 			let image = this.$refs.photo.files[0];
-			this.compress(image, 100, function(x){
-				console.log(image);
+			this.compress(image, 100, x => {
+				this.image = image;
 			});
+		},
+		createRecette(){
+			let data = new FormData();
+			data.append("nom", this.nom);
+			data.append("image", this.image);
+			data.append("details", this.details);
+			data.append("prix", this.prix);
+
+			axios.post(this.host+"/recette/", data, this.headers)
+			.then((response) => {
+				this.$store.state.recettes.push(response.data);
+				this.close();
+			}).catch((error) => {
+			  console.error(error);
+			})
 		}
 	}
 };
