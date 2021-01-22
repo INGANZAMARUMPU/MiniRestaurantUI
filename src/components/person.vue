@@ -1,6 +1,5 @@
 <template>
 <div class="user-card" @click="gotoMenus"
-	@contextmenu.prevent="e => emitContext(e)"
 	:class="{disabled:!serveur.is_active}">
 	<div class="img-user">
 		<img :src='getAvatar(serveur)' alt="">
@@ -30,11 +29,6 @@ export default {
 				this.$store.state.selected_serveur = this.serveur;
 				this.$router.push('menus');
 			}
-		},
-		emitContext(e){
-			this.$emit("contextmenu", {
-				"event":e, "serveur":this.serveur
-			});
 		}
 	}
 };

@@ -1,6 +1,5 @@
 <template>
 	<div class="parent" :data-id='recette.id'
-		@contextmenu.prevent="e => emitContext(e)"
 		:class="{disabled:!recette.is_active}">
 		<div class="img food-img">
 			<img :src="getIcon(recette)" height="112px" style="margin:5px" />
@@ -46,11 +45,6 @@ export default {
 		decreaseQtt : function(){
 			if(!this.recette.is_active) return;
 			this.cart.decrease(this.recette.id);
-		},
-		emitContext(e){
-			this.$emit("contextmenu", {
-				"event":e, "recette":this.recette
-			});
 		}
 	}
 };

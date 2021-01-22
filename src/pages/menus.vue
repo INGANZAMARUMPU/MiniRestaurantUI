@@ -14,7 +14,7 @@
         </button>
       </div>
       <RestoMenu v-for="recette in recettes" :recette="recette"
-         @contextmenu="showContext"/>
+         @contextmenu.native.prevent="e => showContext(e)"/>
     </div>
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="panier_opened=true">
         panier ({{cart.getLength()}})
@@ -61,12 +61,12 @@ export default {
         }
       }
     },
-    showContext(data){
+    showContext(event){
       this.context_shown = true;
       let context = this.$refs.context;
-      context.style.left = data.event.clientX+"px";
-      context.style.top = data.event.clientY+"px";
-      this.menu = data.recette;
+      context.style.left = event.clientX+"px";
+      context.style.top = event.clientY+"px";
+      this.menu = this.recette;
     },
     disableMenu(data){
       this.menu.is_active = !this.menu.is_active;

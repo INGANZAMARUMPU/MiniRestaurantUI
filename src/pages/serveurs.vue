@@ -17,7 +17,7 @@
         v-for="serveur in serveurs"
         :serveur="serveur"
         :id_table="$route.params.id_table"
-        @contextmenu="showContext"
+        @contextmenu.native.prevent="e => showContext(e)"
       />
     </div>
     <DialogServeur :visible="dialog_shown" @close="hideEverything" :serveur="serveur"/>
@@ -64,12 +64,12 @@ export default {
       this.context_shown = false;
       this.menu=false;
     },
-    showContext(data){
+    showContext(event){
       this.context_shown = true;
       let context = this.$refs.context;
-      context.style.left = data.event.clientX+"px";
-      context.style.top = data.event.clientY+"px";
-      this.serveur = data.serveur;
+      context.style.left = event.clientX+"px";
+      context.style.top = event.clientY+"px";
+      this.serveur = this.serveur;
     },
     changeStatus(){
       this.serveur.is_active = !this.serveur.is_active
