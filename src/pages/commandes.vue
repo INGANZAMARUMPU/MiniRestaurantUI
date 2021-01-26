@@ -1,74 +1,67 @@
 <template>
-  <div id="app" @click="popover_opened=false">
+  <div class="parent" @click="popover_opened=false">
     <div class="top">
       <SearchBar @changed="search"/>
       <DateFilter/>
     </div>
-    <div class="recycler">
-    </div>
-      <div class="scrollable-tab">
-        <table class="table commandes">
-          <thead>
-            <tr class="panier-item">
-              <th :class="{'active':column=='id'}" 
-                @click="column='id'">
-                id
-              </th>
-              <th :class="{'active':column=='table'}" 
-                @click="column='table'">
-                table
-              </th>
-              <th :class="{'active':column=='personnel'}" 
-                @click="column='personnel'">
-                personnel
-              </th>
-              <th :class="{'active':column=='serveur'}" 
-                @click="column='serveur'">
-                serveur
-              </th>
-              <th class="right">somme</th>
-              <th class="right">payée</th>
-              <th class="right">Reste</th>
-              <th :class="{'active':column=='date'}" 
-                @click="column='date'">
-                Date
-              </th>
-              <th><button onclick="toggleTableSize(event)">toggle display</button></th>
+      <div class="scrollable">
+      <table>
+        <thead>
+          <tr class="panier-item">
+            <th :class="{'active':column=='id'}" 
+              @click="column='id'">
+              id
+            </th>
+            <th :class="{'active':column=='personnel'}" 
+              @click="column='personnel'">
+              personnel
+            </th>
+            <th :class="{'active':column=='serveur'}" 
+              @click="column='serveur'">
+              serveur
+            </th>
+            <th class="right">somme</th>
+            <th class="right">payée</th>
+            <th class="right">Reste</th>
+            <th :class="{'active':column=='date'}" 
+              @click="column='date'">
+              Date
+            </th>
+            <th><button onclick="toggleTableSize(event)">toggle display</button></th>
+          </tr>
+        </thead>
+        <tbody id="commandes">
+            <tr v-for="commande in commandes">
+              <td>#{{ commande.id }}</td>
+              <td>{{ commande.personnel }}</td>
+              <td>{{ commande.serveur }}</td>
+              <td class="right">{{ money(commande.a_payer) }}</td>
+              <td class="right">{{ money(commande.payee) }}</td>
+              <td class="right">{{ money(commande.reste) }}</td>
+              <td class="time">{{ datetime(commande.date)}}</td>
+              <td>
+                <div class="btns">
+                  <button @click="showDetails(commande)">
+                    détails
+                  </button>
+                  <button @click="showPay(commande)">
+                    payer
+                  </button>
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody id="commandes">
-              <tr v-for="commande in commandes">
-                <td>#{{ commande.id }}</td>
-                <td>Table {{ commande.table }}</td>
-                <td>{{ commande.personnel }}</td>
-                <td>{{ commande.serveur }}</td>
-                <td class="right">{{ money(commande.a_payer) }}</td>
-                <td class="right">{{ money(commande.payee) }}</td>
-                <td class="right">{{ money(commande.reste) }}</td>
-                <td class="time">{{ datetime(commande.date)}}</td>
-                <td>
-                  <div class="btns">
-                    <button @click="showDetails(commande)">
-                      détails
-                    </button>
-                    <button @click="showPay(commande)">
-                      payer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-          </tbody>
-          <tfoot>
-            <tr class="panier-item">
-              <th colspan="3">total</th>
-              <th class="right">{{ money(totals.a_payer) }}</th>
-              <th class="right">{{ money(totals.payee) }}</th>
-              <th class="right">{{ money(totals.reste) }}</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
+        </tbody>
+        <tfoot>
+          <tr class="panier-item">
+            <th colspan="3">total</th>
+            <th class="right">{{ money(totals.a_payer) }} Fbu</th>
+            <th class="right">{{ money(totals.payee) }} Fbu</th>
+            <th class="right">{{ money(totals.reste) }} Fbu</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
       </div>
     <DetailsDialog :visible='details_opened' :commande='active_commande'
       @close="details_opened=false"/>
@@ -171,24 +164,24 @@ export default {
   display: flex;
   justify-content: center;
 }
+.scrollable{
+  overflow: auto;
+  position: relative;
+  height: calc(100vh - 91px);
+}
+table{
+}
 .active{
   color:#007799;
   font-size: 1.2em;
 }
-.scrollable-tab{
-  width: 100%;
-  /*height: 0px;*/
-  overflow: auto;
-  padding: 0 20px;
-  position: relative;
-}
-.scrollable-tab table thead tr th{
+thead th{
   position: sticky;
-  top: 0;
+  top: 0px;
 }
-.scrollable-tab table tfoot tr th{
+tfoot th{
   position: sticky;
-  bottom: 0;
+  bottom: 0px;
 }
 .right{
   text-align: right;
@@ -197,13 +190,11 @@ th, td{
   text-align: center;
 }
 @media screen and (max-width: 650px){
-  .scrollable-tab{
-    position: inherit;
-    height: auto;
-    overflow-y: hidden;
-  }
-  .scrollable-tab table thead tr th{
-    position: inherit;
+  .scrollable{
+    overflow: inherit;
+    position: relative;
+    padding-bottom: inherit;
+    height: inherit;
   }
 }
 </style>

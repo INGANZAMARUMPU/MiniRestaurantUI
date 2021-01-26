@@ -16,10 +16,8 @@ html {
 	margin: 0;
 	padding: 0;
 }
-body,#body {
+body{
 	background: #eee;
-	margin: 0;
-	padding: 0;
 }
 input[type=text], input[type=password], input[type=number], select{
 	padding: 7px;
@@ -68,17 +66,17 @@ tr th{
 tr:nth-child(even) {
   background-color: #eee;
 }
-.table button, .table .btn{
+table button, table .btn{
 	padding: 3px 1em;
 }
-.table tr:hover {
+table tr:hover {
 	background-color: #ddd;
 }
-.table {
+table {
 	border-collapse: collapse;
 	width: 100%;
 }
-.table th, .table td {
+table th, table td {
 	border-bottom: 1px solid #aaa;
 	text-align: left;
 	height: 30px;
@@ -153,4 +151,7 @@ tr:nth-child(even) {
 	color:red;
 }
 @media screen and (max-width: 650px){
+	body{
+		overflow: auto;
+	}
 }
