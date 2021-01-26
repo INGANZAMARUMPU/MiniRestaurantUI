@@ -10,13 +10,14 @@
         <table class="table commandes">
           <thead>
             <tr class="panier-item">
-              <th>id</th>
-              <th>table</th>
-              <th>serveur</th>
+              <th @click="column='id'">id</th>
+              <th @click="column='table'">table</th>
+              <th @click="column='personnel'">personnel</th>
+              <th @click="column='serveur'">serveur</th>
               <th class="right">somme</th>
               <th class="right">payée</th>
               <th class="right">Reste</th>
-              <th>Date</th>
+              <th @click="column='date'">Date</th>
               <th><button onclick="toggleTableSize(event)">toggle display</button></th>
             </tr>
           </thead>
@@ -24,7 +25,8 @@
               <tr v-for="commande in commandes">
                 <td>#{{ commande.id }}</td>
                 <td>Table {{ commande.table }}</td>
-                <td>{{ commande.serveur_name }}</td>
+                <td>{{ commande.personnel }}</td>
+                <td>{{ commande.serveur }}</td>
                 <td class="right">{{ money(commande.a_payer) }}</td>
                 <td class="right">{{ money(commande.payee) }}</td>
                 <td class="right">{{ money(commande.reste) }}</td>
@@ -77,7 +79,7 @@ export default {
     return{
       commandes : [],
       details_opened:false,
-      pay_opened:false,
+      pay_opened:false, column:"",
       active_commande :{
         "details": [], "a_payer": 0,"serveur_name": "",
         "date": "2020-12-23T21:54:10.326506Z",
@@ -119,15 +121,15 @@ export default {
   },
   methods:{
     search(string){
+      string = string.toLowerCase();
       this.commandes = [];
-      for(var i = 0; i < this.$store.state.commandes.length; i++){
-        let commande = this.$store.state.commandes[i];
-        for (let key in commande) {
-          var value = String(commande[key]).toLowerCase();
-          if (value.search(string.toLowerCase()) >= 0 ) {
-            this.commandes.push(commande);
-            break;
-          }
+      let commandes = this.$store.state.commandes;
+      for(var i = 0; i < commandes.length; i++){
+        let commande = commandes[i];
+        var value = commande[this.column].toLowerCase();
+        if (value.search(string) >= 0 ) {
+          this.commandes.push(commande);
+          break;
         }
       }
     },
