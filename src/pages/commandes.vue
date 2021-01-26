@@ -10,14 +10,29 @@
         <table class="table commandes">
           <thead>
             <tr class="panier-item">
-              <th @click="column='id'">id</th>
-              <th @click="column='table'">table</th>
-              <th @click="column='personnel'">personnel</th>
-              <th @click="column='serveur'">serveur</th>
+              <th :class="{'active':column=='id'}" 
+                @click="column='id'">
+                id
+              </th>
+              <th :class="{'active':column=='table'}" 
+                @click="column='table'">
+                table
+              </th>
+              <th :class="{'active':column=='personnel'}" 
+                @click="column='personnel'">
+                personnel
+              </th>
+              <th :class="{'active':column=='serveur'}" 
+                @click="column='serveur'">
+                serveur
+              </th>
               <th class="right">somme</th>
               <th class="right">payée</th>
               <th class="right">Reste</th>
-              <th @click="column='date'">Date</th>
+              <th :class="{'active':column=='date'}" 
+                @click="column='date'">
+                Date
+              </th>
               <th><button onclick="toggleTableSize(event)">toggle display</button></th>
             </tr>
           </thead>
@@ -122,14 +137,21 @@ export default {
   methods:{
     search(string){
       string = string.toLowerCase();
-      this.commandes = [];
+      let value = ""; let commande = null;
       let commandes = this.$store.state.commandes;
+      if(!string){
+        this.commandes = commandes;
+        return;
+      }
+      this.commandes = [];
       for(var i = 0; i < commandes.length; i++){
-        let commande = commandes[i];
-        var value = commande[this.column].toLowerCase();
+        commande = commandes[i];
+        value = String(commande[this.column]).toLowerCase();
+        if(this.column=="date"){
+          value = this.datetime(value)
+        }
         if (value.search(string) >= 0 ) {
           this.commandes.push(commande);
-          break;
         }
       }
     },
@@ -148,6 +170,10 @@ export default {
 .top{
   display: flex;
   justify-content: center;
+}
+.active{
+  color:#007799;
+  font-size: 1.2em;
 }
 .scrollable-tab{
   width: 100%;
