@@ -8,12 +8,12 @@
 			<li class="toggle-submenu">
 				<router-link to="/stock">Stock</router-link>
 			</li>
-			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"
-				@mouseleave="e => hideSubmenu(e)">
+			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"@mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Statistiques</router-link>
 				<div class="submenu">
 					<router-link to="stat_menu">Menu</router-link>
 					<router-link to="stat_service">Service</router-link>
+					<router-link to="">Achats</router-link>
 				</div>
 			</li>
 		</ul>
@@ -66,9 +66,12 @@ li{
 .submenu{
 	display: none;
 	position: absolute;
+	margin-top:5px;
 	background-color: #007799;
 	width: -moz-available;
 	width: -webkit-fill-available;
+	border: 1px solid #068;
+	box-shadow: 0 3px 3px 1px #aaa;
 }
 .submenu a{
 	display: block;

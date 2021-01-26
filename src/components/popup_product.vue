@@ -34,11 +34,11 @@ import axios from "axios";
 export default {
 	props: {
 		visible:{ type:Boolean, default:false},
-		produit:{ type:Object, required:true}
 	},
 	data(){
 		return {
-			logs:"",nom:"",unite:"",sortant:"",rapport:""
+			logs:"",nom:"",unite:"",sortant:"",rapport:"",
+			produit:null
 		}
 	},
 	computed:{

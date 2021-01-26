@@ -2,7 +2,7 @@
 	<div :class="{popup:true, active:visible}" @click="close">
 		<div class="popup-body" @click.prevent.stop>
 			<center>
-				<h3>Diminuer {{produit.nom}}</h3>
+				<h3>Diminuer {{product_name}}</h3>
 			</center>
 			<form method="post">
 				<div class="field">
@@ -34,6 +34,12 @@ export default {
 	data(){
 		return {
 			payee : 0, logs:""
+		}
+	},
+	computed:{
+		product_name(){
+			if(!!this.produit.nom) return this.produit.nom;
+			return "";
 		}
 	},
 	methods: {

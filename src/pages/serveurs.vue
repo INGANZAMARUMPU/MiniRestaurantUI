@@ -17,7 +17,7 @@
         v-for="serveur in serveurs"
         :serveur="serveur"
         :id_table="$route.params.id_table"
-        @contextmenu.native.prevent="e => showContext(e)"
+        @contextmenu.native.prevent="e => showContext(e, serveur)"
       />
     </div>
     <DialogServeur :visible="dialog_shown" @close="hideEverything" :serveur="serveur"/>
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { EVENT_BUS } from "../main";
 import SearchBar from "../components/search";
 import ItemServeur from "../components/person";
 import DialogServeur from "../components/popup_serveur";
@@ -64,12 +63,12 @@ export default {
       this.context_shown = false;
       this.menu=false;
     },
-    showContext(event){
+    showContext(event, serveur){
       this.context_shown = true;
       let context = this.$refs.context;
       context.style.left = event.clientX+"px";
       context.style.top = event.clientY+"px";
-      this.serveur = this.serveur;
+      this.serveur = serveur;
     },
     changeStatus(){
       this.serveur.is_active = !this.serveur.is_active

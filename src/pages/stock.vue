@@ -14,8 +14,7 @@
       @close="out_dialog_opened=false"/>
     <InDialog :visible='in_dialog_opened' :produit='produit'
       @close="in_dialog_opened=false"/>
-    <ProductDialog :visible='product_poped_up' :produit='produit'
-      @close="product_poped_up=false"/>
+    <ProductDialog :visible='product_poped_up' @close="product_poped_up=false"/>
   </div>
 </template>
 
@@ -35,7 +34,7 @@ export default {
       out_dialog_opened:false,
       in_dialog_opened:false,
       product_poped_up:false,
-      produit :null,
+      produit :{},
     }
   },
   mounted(){
