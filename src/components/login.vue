@@ -27,10 +27,8 @@ import axios from "axios";
 export default {
 	data(){
 		return {
-			username:"",
-			password:"",
-			user: null,
-			error:""
+			username:"", password:"",
+			user: null, error:""
 		}
 	},
 	methods:{

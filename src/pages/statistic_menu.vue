@@ -15,6 +15,7 @@
               <th>du</th>
               <th>au</th>
               <th>quantite</th>
+              <th>somme</th>
             </tr>
           </thead>
           <tbody id="menus">
@@ -24,6 +25,7 @@
                 <td>{{ date_du }}</td>
                 <td>{{ date_au }}</td>
                 <td>{{ menu.quantite }}</td>
+                <td>{{ menu.total }}</td>
               </tr>
           </tbody>
         </table>
