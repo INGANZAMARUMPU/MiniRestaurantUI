@@ -8,22 +8,22 @@
       <table>
         <thead>
           <tr class="panier-item">
-            <th :class="{'active':column=='id'}" 
+            <th :class="{'active_col':column=='id'}" 
               @click="column='id'">
               id
             </th>
-            <th :class="{'active':column=='personnel'}" 
+            <th :class="{'active_col':column=='personnel'}" 
               @click="column='personnel'">
               personnel
             </th>
-            <th :class="{'active':column=='serveur'}" 
+            <th :class="{'active_col':column=='serveur'}" 
               @click="column='serveur'">
               serveur
             </th>
             <th class="right">somme</th>
             <th class="right">payée</th>
             <th class="right">Reste</th>
-            <th :class="{'active':column=='date'}" 
+            <th :class="{'active_col':column=='date'}" 
               @click="column='date'">
               Date
             </th>
@@ -171,7 +171,7 @@ export default {
 }
 table{
 }
-.active{
+.active_col{
   color:#007799;
   font-size: 1.2em;
 }

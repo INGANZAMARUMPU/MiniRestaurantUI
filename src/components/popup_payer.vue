@@ -13,13 +13,15 @@
 				<div>la somme à rendre est <b>
 					{{ payee - commande.a_payer }}
 				</b></div>
-				<div class="field">
-					<label for="">nom :</label>
-					<input type="text" name="">
-				</div>
-				<div class="field">
-					<label for="">Telephone :</label>
-					<input type="text" name="">
+				<div v-if="dette_enabled">
+					<div class="field">
+						<label for="">nom :</label>
+						<input type="text" name="">
+					</div>
+					<div class="field">
+						<label for="">Telephone :</label>
+						<input type="text" name="">
+					</div>
 				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
@@ -37,9 +39,7 @@ export default {
 		commande:{ type:Object, required:true}
 	},
 	data(){
-		return {
-			payee : 0, logs:""
-		}
+		return {logs:"", payee:0}
 	},
 	computed:{
 		host(){
@@ -47,6 +47,11 @@ export default {
 		},
 		dette_enabled(){
 			return this.commande.a_payer>this.payee
+		},
+	},
+	watch:{
+		commande(new_val){
+			this.payee = new_val.a_payer;
 		}
 	},
 	methods: {
