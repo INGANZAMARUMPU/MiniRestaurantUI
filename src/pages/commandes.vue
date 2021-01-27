@@ -90,9 +90,9 @@ export default {
       pay_opened:false, column:"",
       active_commande :{
         "details": [], "a_payer": 0,"serveur_name": "",
-        "date": "2020-12-23T21:54:10.326506Z",
-        "payee": 0, "reste": 0, "table": 0,
-        "serveur": 0, "personnel": 0, "tel": ""
+        "date": "2020-12-23T21:54:10.326506Z","payee": 0,
+        "reste": 0, "table": 0,"serveur": 0, "personnel": 0,
+        "tel": ""
       },
     }
   },

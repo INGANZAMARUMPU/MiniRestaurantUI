@@ -28,7 +28,7 @@
 					</tr>
 				</tfoot>
 			</table>
-			<label style="color:red" v-if="erreur!=''">{{ erreur }}</label>
+			<label style="color:red" v-if="!!logs">{{ logs }}</label>
 			<div class="btns">
 				<button @click="validerCommande">Payer</button>
 			</div>
@@ -43,7 +43,7 @@ export default {
 	},
 	data () {
 		return {
-			cart : this.$store.state.cart, erreur:"",
+			cart : this.$store.state.cart, logs:"",
 			dette_enabled:false, client:{}
 		}
 	},
@@ -81,13 +81,23 @@ export default {
 			}
 			axios.post(this.$store.state.host+"/commande/",commande,headers)
 			.then((response) => {
-				this.$store.state.commandes.push(response.data);
+				this.$store.state.commandes.unshift(response.data);
+				let produit = null;
+				this.$store.state.cart.content.forEach((x, i) => {
+					if(!!x.recette.produit){
+						produit = this.$store.state.stocks.find(
+							p => p.id == x.recette.produit
+						)
+						produit.quantite -= x.quantite;
+					}
+				})
 				this.$store.state.cart.content=[];
 				this.close();
 			}).catch((error) => {
 				if (!!error.response) {
 					this.logs = error.response.data.status
 				} else {
+					console.error(error)
 					this.logs = "une erreur est survenue";
 				}
 			});

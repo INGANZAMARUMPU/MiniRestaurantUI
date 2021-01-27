@@ -5,8 +5,7 @@
 			<img :src="getIcon(recette)" height="112px" style="margin:5px" />
 		</div>
 		<div class="title">
-			<span class="name">{{ recette.nom }}</span>
-			<span class="prix"> {{ money(recette.prix) }}</span>
+			{{ recette.nom }} {{ money(recette.prix) }}
 			Fbu
 		</div>
 		<div class="buttons">
@@ -66,6 +65,9 @@ export default {
 .title{
 	font-size: 1.1em;
 	padding-bottom: 5px;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	max-height: 2.2em;
 }
 .buttons{
 	display: flex;
