@@ -43,6 +43,11 @@ export default {
       return !!this.serveur && this.serveur.is_active
     }
   },
+  watch:{
+    "$store.state.serveurs"(new_val){
+      this.serveurs = new_val
+    }
+  },
   methods: {
     search(string){
       this.serveurs = [];

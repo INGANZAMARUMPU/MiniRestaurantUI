@@ -47,6 +47,11 @@ export default {
       return !!this.menu && this.menu.is_active
     }
   },
+  watch:{
+    "$store.state.recettes"(new_val){
+      this.recettes = new_val
+    }
+  },
   methods:{
     search(string){
       this.recettes = [];

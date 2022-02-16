@@ -30,7 +30,7 @@
 			</table>
 			<label style="color:red" v-if="!!logs">{{ logs }}</label>
 			<div class="btns">
-				<button @click="validerCommande">Payer</button>
+				<button @click="validerCommande">Vendre</button>
 			</div>
 		</div>
 	</div>
