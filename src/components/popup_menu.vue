@@ -1,8 +1,9 @@
 <template>
-	<div :class="{popup:true, active:visible}" @click="close">
+	<div :class="{popup:true, active:visible}">
 		<div class="popup-body" @click.stop>
 			<center>
 				<h3>Menu</h3>
+				<button @click="close" class="close">&times</button>
 			</center>
 			<form method="post">
 				<div class="field">

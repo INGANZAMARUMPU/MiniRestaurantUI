@@ -1,8 +1,9 @@
 <template>
-	<div :class="{popup:true, active:visible}" @click="close">
+	<div :class="{popup:true, active:visible}">
 		<div class="popup-body" @click.prevent.stop>
 			<center>
 				<h3>Payment facture #{{commande.id}}</h3>
+				<button @click="close" class="close">&times</button>
 			</center>
 			<form method="post">
 				<div>la somme à payer est <b>{{ commande.a_payer }}</b></div>

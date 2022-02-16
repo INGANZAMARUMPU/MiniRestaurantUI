@@ -1,8 +1,9 @@
 <template>
-	<div id="panier" :class="{popup:true, active:visible}"  @click="close">
+	<div id="panier" :class="{popup:true, active:visible}">
 		<div class="popup-body" @click.prevent.stop>
 			<table class="table panier">
 				<caption class="title">Panier</caption>
+				<button @click="close" class="close">&times</button>
 				<thead>
 					<tr>
 						<th>Name</th><th>price</th>

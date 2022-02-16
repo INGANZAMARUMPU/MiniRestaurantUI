@@ -5,7 +5,7 @@
       <div class="table_size">
         <button class="big" @click="dialog_shown=true;table=null">+</button>
       </div>
-      <TableItem v-for="table in tables" :table="table" @edit="editTable"/>
+      <TableItem v-for="table in tables" :table="table" @edit="editTable" :key="table.id"/>
     </div>
     <TableDialog :table="table" :visible="dialog_shown" @close="dialog_shown=false"/>
   </div>

@@ -13,9 +13,8 @@
           +
         </button>
       </div>
-      <ItemServeur
-        v-for="serveur in serveurs"
-        :serveur="serveur"
+      <ItemServeur v-for="serveur in serveurs"
+        :serveur="serveur" :key="serveur.id"
         :id_table="$route.params.id_table"
         @contextmenu.native.prevent="e => showContext(e, serveur)"
       />
