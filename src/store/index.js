@@ -9,6 +9,7 @@ export default new Vuex.Store({
 		recettes : [],
 		tables : [],
 		commandes : [],
+		commande:null,
 		stats:{ menu:[], service:[]},
 		stocks : [],
 		// host:"/api",

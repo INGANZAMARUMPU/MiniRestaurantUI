@@ -1,5 +1,5 @@
 <template>
-  <div @click="hideEverything()">
+  <div @click="hideEverything()" class="nonprintable">
     <SearchBar @changed="search"/>
     <div class="context" ref="context" style="display:none" 
       :class="{'visible':context_shown}">

@@ -165,3 +165,11 @@ table th, table td {
 		overflow: auto;
 	}
 }
+@media print{
+	.nonprintable{
+		display: none;
+	}
+	.printable{
+		display: block;
+	}
+}

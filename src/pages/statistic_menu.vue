@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="popover_opened=false">
+  <div id="app" class="nonprintable" @click="popover_opened=false">
     <div class="top">
       <SearchBar @changed="search"/>
       <DateFilter @changed="filter"/>

@@ -1,6 +1,6 @@
 <template>
 	<div :class="{popup:true, active:visible}">
-		<div class="popup-body" @click.prevent.stop>
+		<div class="popup-body" @click.prevent.stop v-if="!!commande">
 			<center>
 				<h3>Payment facture #{{commande.id}}</h3>
 				<button @click="close" class="close">&times</button>
@@ -37,7 +37,7 @@ import axios from "axios";
 export default {
 	props: {
 		visible:{ type:Boolean, default:false},
-		commande:{ type:Object, required:true}
+		commande:{ type:Object, default:null}
 	},
 	data(){
 		return {logs:"", payee:0}

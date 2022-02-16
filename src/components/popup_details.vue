@@ -1,6 +1,6 @@
 <template>
 	<div id="panier" :class="{popup:true, active:visible}">
-		<div class="popup-body" @click.prevent.stop>
+		<div class="popup-body" @click.prevent.stop v-if="!!commande">
 			<table class="table panier">
 				<caption class="title">Details Commande #{{commande.id}}</caption>
 				<button @click="close" class="close">&times</button>
@@ -44,7 +44,7 @@ import axios from "axios";
 export default {
 	props: {
 		visible:{ type:Boolean, default:false},
-		commande:{ type:Object, required:true}
+		commande:{ type:Object, default:null}
 	},
 	methods: {
 		close(){

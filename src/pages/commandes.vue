@@ -1,5 +1,5 @@
 <template>
-  <div class="parent" @click="popover_opened=false">
+  <div class="parent nonprintable" @click="popover_opened=false">
     <div class="top">
       <SearchBar @changed="search"/>
       <DateFilter/>
@@ -88,12 +88,7 @@ export default {
       commandes : [],
       details_opened:false,
       pay_opened:false, column:"",
-      active_commande :{
-        "details": [], "a_payer": 0,"serveur_name": "",
-        "date": "2020-12-23T21:54:10.326506Z","payee": 0,
-        "reste": 0, "table": 0,"serveur": 0, "personnel": 0,
-        "tel": ""
-      },
+      active_commande :null,
     }
   },
   computed:{
@@ -106,6 +101,11 @@ export default {
         tots.reste += commande.reste;
       }
       return tots;
+    }
+  },
+  watch:{
+    active_commande(new_val){
+      this.$store.state.commande = new_val
     }
   },
   mounted(){

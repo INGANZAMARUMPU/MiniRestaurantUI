@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="hideEverything()">
+  <div id="app" class="nonprintable" @click="hideEverything()">
     <div class="context" ref="context" style="display:none" 
       :class="{'visible':context_shown}">
       <div class="" @click="disableMenu" v-if="menuActive">desactiver</div>

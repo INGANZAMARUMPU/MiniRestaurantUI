@@ -2,7 +2,7 @@
 <div class="printable invoice">
     <center class="header">
         <img width=100 src="/static/logo.png" style="display:block" />
-        <div>
+        <div v-if="!!commande">
             Facture no. {{commande.id}} du {{datetime(commande.date)}}<br>
         </div>
         <div style="text-align: left; display: inline-block;">
@@ -14,16 +14,18 @@
             MIAMI BEACH<br/>
             Bujumbura, KAJAGA
         </div>
-        <div><b>{{ commande.infos.client }}</b></div>
+        <div v-if="!!commande"><b>{{ commande.client }}</b></div>
     </center>
     <table style="width:100%;">
-        <tbody>
+        <thead>
             <tr style="border-bottom: 1px solid #aaa;text-align: left;">
                 <th>Article</th>
                 <th style="">P.U.</th>
                 <th>Qt.</th>
                 <th style="text-align: right;">Total</th>
             </tr>
+        </thead>
+        <tbody v-if="!!commande">
             <tr style="text-align: left;" v-for="item in commande.ventes">
                 <td>{{ item.product.nom }}</td>
                 <td>{{ item.product.prix_vente }} Fbu</td>
@@ -32,11 +34,13 @@
             </tr>
             <tr style="border-top: 1px solid #aaa;text-align: left;">
                 <th colspan="3">Total</th>
-                <th style="text-align: right;"><b>{{ commande.infos.prix }} Fbu</b></th>
+                <th style="text-align: right;"><b>{{ commande.prix }} Fbu</b></th>
             </tr>
         </tbody>
     </table>
-    <div style="margin:10px">Caissier: {{ !!commande.infos.user?commande.infos.user.fullname:"" }}</div>
+    <div style="margin:10px" v-if="!!commande">
+        Caissier: {{ !!commande.user?commande.user.fullname:"" }}
+    </div>
     <center>
     	<strong>Murakoze, Merci, Thank you!</strong>
     </center>

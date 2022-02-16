@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="nonprintable">
     <SearchBar @changed="search"/>
     <div class="recycler">
       <div class="product_size">

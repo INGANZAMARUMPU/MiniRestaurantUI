@@ -1,12 +1,13 @@
 <template>
-  <div id="app">
+  <div>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div v-if="user != null">
-      <TopBar :user="user"/>
+      <TopBar :user="user" class="nonprintable"/>
       <router-view/>
-      <button @click="logout" class="logout">
+      <button @click="logout" class="logout nonprintable">
         logout
       </button>
+      <Invoice/>
     </div>
     <div v-else>
       <AppLogin @connected="logIn"/>
@@ -18,10 +19,11 @@
 import axios from "axios";
 import AppLogin from "./components/login";
 import TopBar from "./components/topbar";
+import Invoice from "./components/invoice";
 
 export default {
   name: 'app',
-  components:{ AppLogin, TopBar},
+  components:{ AppLogin, TopBar, Invoice},
   data () {
     return {
       user:this.$store.state.user,
