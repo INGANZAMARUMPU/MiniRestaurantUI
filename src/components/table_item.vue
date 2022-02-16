@@ -5,9 +5,7 @@
 			<button @click.stop="edit">
 				modifier
 			</button>
-			<button @click.stop>
-				Payer
-			</button>
+			<div></div>
 		</div>
 	</div>
 </template>
@@ -55,7 +53,7 @@ export default {
 	border-radius: 0;
 	margin: 0;
 }
-.buttons *:hover{
+.buttons button:hover{
 	background-color: #007799;
 }
 .buttons *:last-child{
