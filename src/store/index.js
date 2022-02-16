@@ -11,8 +11,8 @@ export default new Vuex.Store({
 		commandes : [],
 		stats:{ menu:[], service:[]},
 		stocks : [],
-		// host:"/api",
-		host:"http://127.0.0.1:8000/api",
+		host:"/api",
+		// host:"http://127.0.0.1:8000/api",
 		selected_serveur: null,
 		selected_table: null,
 		cart : new Object({

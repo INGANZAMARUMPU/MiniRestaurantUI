@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody id="commandes">
-            <tr v-for="commande in commandes">
+            <tr v-for="commande in commandes" :class="{'ideni':commande.a_payer>commande.payee}">
               <td>#{{ commande.id }}</td>
               <td>{{ commande.personnel }}</td>
               <td>{{ commande.serveur }}</td>
@@ -188,6 +188,9 @@ tfoot th{
 }
 th, td{
   text-align: center;
+}
+.ideni{
+  color: red;
 }
 @media screen and (max-width: 650px){
   .scrollable{
