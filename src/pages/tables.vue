@@ -47,7 +47,18 @@ export default {
     editTable(table){
       this.table = table;
       this.dialog_shown=true;
+    },
+    fetchData(){
+      axios.get(this.host+'/table/', this.headers)
+      .then((response) => {
+        this.$store.state.tables = response.data;
+      }).catch((error) => {
+        console.error(error);
+      });
     }
+  },
+  mounted(){
+    this.fetchData()
   }
 };
 </script>

@@ -33,30 +33,27 @@ export default {
     }
   },
   created(){
-    var state = JSON.parse(localStorage.getItem('state'));
-    if (state) {
-      this.$store.state.user = state.user;
+    var user = JSON.parse(localStorage.getItem('user'));
+    if(!!user) {
+      this.$store.state.user = user;
       axios.post(this.host+'/refresh/', {
-          "refresh": state.user.refresh
+          "refresh": user.refresh
         })
         .then((response) => {
           this.$store.state.user.access = response.data.access;
         }).catch((error) => {
           return;
         });
-      this.$store.state.serveurs = state.serveurs; 
-      this.$store.state.recettes = state.recettes; 
-      this.$store.state.tables = state.tables;
-      this.user = state.user;
+      this.user = user;
     } else {
       console.warn("il y'a pas de session");
     }
   },
   watch:{
-    "$store.state":{
+    "$store.state.user":{
       deep: true,
       handler(new_state){
-        localStorage.setItem('state', JSON.stringify(new_state));  
+        localStorage.setItem('user', JSON.stringify(new_state));  
       }
     },
   },
@@ -64,45 +61,16 @@ export default {
     logIn(user){
       if (user != null && user.access.length>20) {
         this.user = user;
-        this.fetchData();
       }
     },
     logout(){
-      localStorage.setItem('state', null);
+      localStorage.setItem('user', null);
       this.$store.state.user = null;
       this.$store.state.serveurs = null;
       this.$store.state.recettes = null;
       this.$store.state.tables = null;
       this.user = null;
-    },
-    fetchData(){
-      let headers = {
-        headers: {
-          "Authorization": "Bearer " + this.user.access
-        }
-      }
-      axios.get(this.host+'/serveur/', headers)
-        .then((response) => {
-          this.$store.state.serveurs = response.data;
-        }).catch((error) => {
-          console.error(error);
-        });
-
-      axios.get(this.host+'/table/', headers)
-        .then((response) => {
-          this.$store.state.tables = response.data;
-        }).catch((error) => {
-          console.error(error);
-        });
-
-      axios.get(this.host+'/recette/', headers)
-        .then((response) => {
-          this.$store.state.recettes = response.data;
-        }).catch((error) => {
-          console.error(error);
-        });
     }
-
   }
 };
 </script>

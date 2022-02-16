@@ -64,7 +64,7 @@ export default {
 			this.avatar = this.$refs.avatar.files[0];
 		},
 		submit(){
-			if(!!serveur){
+			if(!!this.serveur){
 				this.updateServeur();
 			}else{
 				this.addServeur()

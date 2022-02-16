@@ -72,7 +72,18 @@ export default {
     },
     changeStatus(){
       this.serveur.is_active = !this.serveur.is_active
+    },
+    fetchData(){
+      axios.get(this.host+'/serveur/', this.headers)
+      .then((response) => {
+        this.$store.state.serveurs = response.data;
+      }).catch((error) => {
+        console.error(error);
+      });
     }
+  },
+  mounted(){
+    this.fetchData()
   }
 };
 </script>

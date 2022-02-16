@@ -2,10 +2,24 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from "axios";
 
 Vue.config.productionTip = false
+window.axios = axios
 
 Vue.mixin({
+  computed:{
+    headers(){
+      return {
+        "headers": {
+          "Authorization": "Bearer " + this.$store.state.user.access
+        }
+      }
+    },
+    host(){
+      return this.$store.state.host
+    }
+  },
   methods: {
     money(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

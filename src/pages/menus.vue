@@ -76,7 +76,18 @@ export default {
       this.menu_opened = false;
       this.context_shown = false;
       this.menu=null;
+    },
+    fetchData(){
+      axios.get(this.host+'/recette/', this.headers)
+      .then((response) => {
+        this.$store.state.recettes = response.data;
+      }).catch((error) => {
+        console.error(error);
+      });
     }
+  },
+  mounted(){
+    this.fetchData()
   }
 };
 </script>
