@@ -33,11 +33,11 @@
         <tbody id="commandes">
             <tr v-for="commande in commandes" :class="{'ideni':commande.a_payer>commande.payee}">
               <td>#{{ commande.id }}</td>
-              <td>{{ commande.personnel }}</td>
+              <td>{{ commande.user }}</td>
               <td>{{ commande.serveur }}</td>
               <td class="right">{{ money(commande.a_payer) }}</td>
               <td class="right">{{ money(commande.payee) }}</td>
-              <td class="right">{{ money(commande.reste) }}</td>
+              <td class="right">{{ money(commande.a_payer - commande.payee) }}</td>
               <td class="time">{{ datetime(commande.date)}}</td>
               <td>
                 <div class="btns">
@@ -98,7 +98,7 @@ export default {
       for(let commande of this.commandes) {
         tots.a_payer += commande.a_payer;
         tots.payee += commande.payee;
-        tots.reste += commande.reste;
+        tots.reste += commande.a_payer - commande.payee;
       }
       return tots;
     }
