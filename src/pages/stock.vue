@@ -11,9 +11,9 @@
         @out="decreaseStock(produit)" @in="increaseStock(produit)"/>
     </div>
     <OutDialog :visible='out_dialog_opened' :produit='produit'
-      @close="out_dialog_opened=false"/>
+      @close="close"/>
     <InDialog :visible='in_dialog_opened' :produit='produit'
-      @close="in_dialog_opened=false"/>
+      @close="close"/>
     <ProductDialog :visible='product_poped_up' @close="product_poped_up=false"/>
   </div>
 </template>
@@ -57,6 +57,11 @@ export default {
     }
   },
   methods:{
+    close(){
+      this.in_dialog_opened=false
+      this.out_dialog_opened=false
+      this.produit = null
+    },
     search(string){
       this.stocks = [];
       for(var i = 0; i < this.$store.state.stocks.length; i++){

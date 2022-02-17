@@ -1,11 +1,11 @@
 <template>
 	<div :class="{popup:true, active:visible}">
 		<div class="popup-body" @click.prevent.stop>
-			<center>
+			<center v-if="produit">
 				<h3>Diminuer {{product_name}}</h3>
 				<button @click="close" class="close">&times</button>
 			</center>
-			<form method="post">
+			<form method="post" v-if="produit">
 				<div class="field">
 					<label for="id_quantite">Quantite:</label>
 					<input type="number" name="quantite" placeholder="quantite" required="" id="id_quantite">
@@ -30,7 +30,7 @@ import axios from "axios";
 export default {
 	props: {
 		visible:{ type:Boolean, default:false},
-		produit:{ type:Object, required:true}
+		produit:{ type:Object, default:null}
 	},
 	data(){
 		return {

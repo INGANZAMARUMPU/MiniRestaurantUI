@@ -1,13 +1,16 @@
 <template>
 	<div :class="{popup:true, active:visible}">
 		<div class="popup-body" @click.prevent.stop>
-			<center>
+			<center v-if="produit">
 				<h3>Augmenter {{produit.nom}}</h3>
 				<button @click="close" class="close">&times</button>
 			</center>
 			<form method="post">
-				<div class="field">
-					<label for="id_quantite">Quantite:</label>
+				<div class="field" v-if="produit">
+					<label for="id_quantite">
+						Quantite:
+						<span v-if="achat.quantite">({{achat.quantite*produit.rapport}} {{ produit.unite_sortant }})</span>
+					</label>
 					<input type="text" placeholder="quantite" id="id_quantite"
 						v-model="achat.quantite">
 				</div>
@@ -18,7 +21,7 @@
 				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
-					<input type="submit" value="Vendre" @click="acheter">
+					<input type="submit" value="Acheter" @click="acheter">
 				</div>
 			</form>
 		</div>
@@ -29,7 +32,7 @@ import axios from "axios";
 export default {
 	props: {
 		visible:{ type:Boolean, default:false},
-		produit:{ type:Object, required:true}
+		produit:{ type:Object, default:null}
 	},
 	data(){
 		return {
@@ -47,10 +50,11 @@ export default {
 				}
 			}
 			this.achat.produit = this.produit.id
-			this.achat.quantite = eval(this.achat.quantite);
+			this.achat.quantite = eval(this.achat.quantite*this.produit.rapport);
 			axios.post(this.$store.state.host+"/achat/",this.achat, headers)
 			.then((response) => {
 				this.produit.quantite += response.data.quantite;
+				this.close()
 			}).catch((error) => {
 				if (!!error.response) {
 					this.logs = error.response.data.status

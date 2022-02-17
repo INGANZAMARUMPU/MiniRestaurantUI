@@ -34,7 +34,7 @@ input[type=submit], button{
 .field{
 	margin: 10px 0;
 }
-.field *{
+.field>*{
 	display: block;
 	width: 100%;
 }
