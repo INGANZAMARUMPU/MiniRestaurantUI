@@ -21,6 +21,25 @@ Vue.mixin({
     }
   },
   methods: {
+    cleanString(str){
+      if (!str) return "";
+      if(typeof(str)=='object'){
+        let string = ""
+        for( let [clef, valeur] of Object.entries(str)){
+          if(typeof(valeur)=='object'){
+            let child = ""
+            for( let [key, value] of Object.entries(valeur)){
+              child += `- ${key}: ${value}<br>`
+            }
+            valeur = child;
+          }
+          string+=`${clef}: ${valeur}<br>`
+        }
+        return string;
+      };
+      str = str.toString();
+      return str.replace( /(<([^>]+)>)/ig, '');
+    },
     money(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
@@ -52,7 +71,7 @@ Vue.mixin({
     },
     displayErrorOrRefreshToken(error, callback){
       if(!!error.response){
-        if(error.response.code == "token_not_valid"){ 
+        if(error.response.data.code == "token_not_valid"){ 
           let refresh = this.$store.state.user.refresh
           if(!refresh){
             this.$store.state.user = null;
@@ -74,12 +93,16 @@ Vue.mixin({
     },
     displayNotification(error){
       if (Notification.permission === 'granted') {
-        const notification = new Notification(this.cleanString(error.response.data))
+        const notification = new Notification(
+          this.cleanString(error.response.data).replaceAll("<br>","")
+        )
       }
       else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
-            const notification = new Notification(this.cleanString(error.response.data))
+            const notification = new Notification(
+              this.cleanString(error.response.data).replaceAll("<br>","")
+            )
           }
         })
       }

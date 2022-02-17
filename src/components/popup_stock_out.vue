@@ -15,6 +15,7 @@
 					<select name="motif" placeholder="motif " class="input" id="id_motif">
 						<option value="vendu">vendu</option>
 						<option value="perimé">perimé</option>
+						<option value="cassé">cassé</option>
 					</select>
 				</div>
 				<div class="submit">

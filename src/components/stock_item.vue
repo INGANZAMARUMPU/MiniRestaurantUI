@@ -1,7 +1,7 @@
 <template>
 	<div class="parent">
 		<div class="title">{{ produit.nom }}</div>
-		<div>{{ produit.quantite }} {{ produit.unite }}</div>
+		<div>{{ produit.quantite }} {{ produit.unite_sortant }}</div>
 		<div class="buttons">
 			<button @click="decreaseStock">- Sortie</button>
 			<button @click="increaseStock">+ Entrée</button>
