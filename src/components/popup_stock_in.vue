@@ -44,14 +44,9 @@ export default {
 			this.$emit("close")
 		},
 		acheter(){
-			let headers = {
-				headers: {
-				"Authorization": "Bearer " + this.$store.state.user.access
-				}
-			}
 			this.achat.produit = this.produit.id
 			this.achat.quantite = eval(this.achat.quantite*this.produit.rapport);
-			axios.post(this.$store.state.host+"/achat/",this.achat, headers)
+			axios.post(this.$store.state.host+"/achat/",this.achat, this.headers)
 			.then((response) => {
 				this.produit.quantite += response.data.quantite;
 				this.close()
