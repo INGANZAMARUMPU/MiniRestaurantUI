@@ -34,7 +34,9 @@
 					>
 					supprimer
 				</button>
-				<button id="valider_imprimer">imprimer</button>
+				<button @click="imprimer">
+					imprimer
+				</button>
 			</div>
 		</div>
 	</div>
@@ -49,6 +51,9 @@ export default {
 	methods: {
 		close(){
 			this.$emit("close")
+		},
+		imprimer(){
+			window.print()
 		}
 	}
 };

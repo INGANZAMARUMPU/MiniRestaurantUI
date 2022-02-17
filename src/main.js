@@ -49,6 +49,40 @@ Vue.mixin({
             URL.revokeObjectURL(file);
         };
       }
+    },
+    displayErrorOrRefreshToken(error, callback){
+      if(!!error.response){
+        if(error.response.code == "token_not_valid"){ 
+          let refresh = this.$store.state.user.refresh
+          if(!refresh){
+            this.$store.state.user = null;
+            return
+          }
+          axios.post(this.url+"/refresh/", {"refresh":refresh})
+          .then((response) => {
+            this.$store.state.user.access = response.data.access
+            if(typeof callback == "function") callback()
+          }).catch((error) => {
+            console.error(error)
+            this.displayNotification(error)
+            this.$store.state.user = null;
+          })
+        } else {
+          this.displayNotification(error)
+        }
+      }
+    },
+    displayNotification(error){
+      if (Notification.permission === 'granted') {
+        const notification = new Notification(this.cleanString(error.response.data))
+      }
+      else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            const notification = new Notification(this.cleanString(error.response.data))
+          }
+        })
+      }
     }
   },
 })

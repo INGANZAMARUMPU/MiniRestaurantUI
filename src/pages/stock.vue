@@ -7,7 +7,7 @@
           +
         </button>
       </div>
-      <StockItem v-for="produit in stocks" :produit="produit"
+      <StockItem v-for="produit in stocks" :produit="produit" :key="produit.id"
         @out="decreaseStock(produit)" @in="increaseStock(produit)"/>
     </div>
     <OutDialog :visible='out_dialog_opened' :produit='produit'

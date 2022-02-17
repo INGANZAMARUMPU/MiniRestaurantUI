@@ -53,7 +53,7 @@ export default {
       .then((response) => {
         this.$store.state.tables = response.data;
       }).catch((error) => {
-        console.error(error);
+        displayErrorOrRefreshToken(error, fetchData)
       });
     }
   },

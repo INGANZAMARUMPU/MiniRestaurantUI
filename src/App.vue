@@ -38,15 +38,6 @@ export default {
     var user = JSON.parse(localStorage.getItem('user'));
     if(!!user) {
       this.$store.state.user = user;
-      axios.post(this.host+'/refresh/', {
-          "refresh": user.refresh
-        })
-        .then((response) => {
-          this.$store.state.user.access = response.data.access;
-        }).catch((error) => {
-          return;
-        });
-      this.user = user;
     } else {
       console.warn("il y'a pas de session");
     }
@@ -55,7 +46,8 @@ export default {
     "$store.state.user":{
       deep: true,
       handler(new_state){
-        localStorage.setItem('user', JSON.stringify(new_state));  
+        localStorage.setItem('user', JSON.stringify(new_state));
+        this.user = user;
       }
     },
   },

@@ -13,7 +13,7 @@
           +
         </button>
       </div>
-      <RestoMenu v-for="recette in recettes" :recette="recette"
+      <RestoMenu v-for="recette in recettes" :recette="recette" :key="recette.id"
          @contextmenu.native.prevent="e => showContext(e, recette)"/>
     </div>
     <button class="btn-panier" href="#" id="toggle-panier" @click.prevent.stop="panier_opened=true">
