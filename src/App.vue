@@ -36,8 +36,12 @@ export default {
   },
   created(){
     var user = JSON.parse(localStorage.getItem('user'));
+    var selected_table = JSON.parse(localStorage.getItem('selected_table'));
+    var selected_serveur = JSON.parse(localStorage.getItem('selected_serveur'));
     if(!!user) {
       this.$store.state.user = user;
+      this.$store.state.selected_table = selected_table;
+      this.$store.state.selected_serveur = selected_serveur;
     } else {
       console.warn("il y'a pas de session");
     }
@@ -45,9 +49,23 @@ export default {
   watch:{
     "$store.state.user":{
       deep: true,
-      handler(new_state){
-        localStorage.setItem('user', JSON.stringify(new_state));
-        this.user = user;
+      handler(new_val){
+        localStorage.setItem('user', JSON.stringify(new_val));
+        this.user = new_val;
+      }
+    },
+    "$store.state.selected_table":{
+      deep: true,
+      handler(new_val){
+        localStorage.setItem('selected_table', JSON.stringify(new_val));
+        this.selected_table = new_val;
+      }
+    },
+    "$store.state.selected_serveur":{
+      deep: true,
+      handler(new_val){
+        localStorage.setItem('selected_serveur', JSON.stringify(new_val));
+        this.selected_serveur = new_val;
       }
     },
   },
