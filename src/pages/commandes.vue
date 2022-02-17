@@ -106,6 +106,9 @@ export default {
   watch:{
     active_commande(new_val){
       this.$store.state.commande = new_val
+    },
+    "$store.state.commandes"(new_val){
+      this.commandes = new_val
     }
   },
   mounted(){

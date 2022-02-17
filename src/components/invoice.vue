@@ -26,20 +26,20 @@
             </tr>
         </thead>
         <tbody v-if="!!commande">
-            <tr style="text-align: left;" v-for="item in commande.ventes">
-                <td>{{ item.product.nom }}</td>
-                <td>{{ item.product.prix_vente }} Fbu</td>
+            <tr style="text-align: left;" v-for="item in commande.details">
+                <td>{{ item.nom }}</td>
+                <td>{{ item.prix }} Fbu</td>
                 <td>x {{ item.quantite }}</td>
-                <td style="text-align: right;">{{ item.getTotal() }} Fbu</td>
+                <td style="text-align: right;">{{ item.somme }} Fbu</td>
             </tr>
             <tr style="border-top: 1px solid #aaa;text-align: left;">
                 <th colspan="3">Total</th>
-                <th style="text-align: right;"><b>{{ commande.prix }} Fbu</b></th>
+                <th style="text-align: right;"><b>{{ commande.a_payer }} Fbu</b></th>
             </tr>
         </tbody>
     </table>
     <div style="margin:10px" v-if="!!commande">
-        Caissier: {{ !!commande.user?commande.user.fullname:"" }}
+        Caissier: {{ commande.serveur||"" }}
     </div>
     <center>
     	<strong>Murakoze, Merci, Thank you!</strong>

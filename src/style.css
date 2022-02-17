@@ -63,6 +63,9 @@ tr th{
 tr:nth-child(even) {
   background-color: #eee;
 }
+.invoice tr:nth-child(even) {
+  background-color: #0000;
+}
 table button, table .btn{
 	padding: 3px 1em;
 }

@@ -30,8 +30,7 @@
 				</tfoot>
 			</table>
 			<div class="btns-valider">
-				<button style="margin-right:3px"vid="valider-panier"
-					>
+				<button style="margin-right:3px"vid="valider-panier" @click="supprimer">
 					supprimer
 				</button>
 				<button @click="imprimer">
@@ -54,6 +53,23 @@ export default {
 		},
 		imprimer(){
 			window.print()
+		},
+		supprimer(){
+			axios.delete(this.host+`/commande/${this.commande.id}/`, this.headers)
+			.then((response) => {
+				let index = -1
+				let commandes = this.$store.state.commandes
+				for(var i=0; i<commandes.length; i++){
+					if(commandes[i].id == this.commande.id){
+						index = i;
+						break
+					}
+				}
+				this.$store.state.commandes.splice(index, 1)
+				this.close()
+			}).catch((error) => {
+				console.error(error);
+			});
 		}
 	}
 };
