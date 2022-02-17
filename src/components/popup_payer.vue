@@ -71,7 +71,8 @@ export default {
 			}
 			axios.post(this.host+'/paiement/', data, headers)
 			.then((response) => {
-				this.commande.payee += parseInt(this.payee);
+				this.commande.payee += response.data.somme
+				this.commande.reste -= response.data.somme
 				this.close()
 			}).catch((error) => {
 				if (!!error.response) {
