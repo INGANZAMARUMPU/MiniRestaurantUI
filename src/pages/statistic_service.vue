@@ -14,16 +14,20 @@
               <th>serveur</th>
               <th>du</th>
               <th>au</th>
-              <th>quantite</th>
+              <th>fois</th>
+              <th>montant</th>
+              <th>payee</th>
             </tr>
           </thead>
           <tbody id="services">
               <tr v-for="service in services">
                 <td>#{{ service.id }}</td>
-                <td>{{ service.firstname+" "+service.lastname }}</td>
+                <td>{{ service.nom+" "+service.prenom }}</td>
                 <td>{{ date_du }}</td>
                 <td>{{ date_au }}</td>
-                <td>{{ service.quantite }}</td>
+                <td>{{ service.fois }}</td>
+                <td>{{ service.prix }}</td>
+                <td>{{ service.payee }}</td>
               </tr>
           </tbody>
         </table>
@@ -52,7 +56,7 @@ export default {
       this.services = result;
       this.raw_services = result;
     } else {
-      axios.get(this.$store.state.host+'/statistic/service/', this.headers)
+      axios.get(this.$store.state.host+'/commande/stats/', this.headers)
       .then((response) => {
         this.$store.state.stats.service = response.data;
         this.services = response.data;
@@ -77,10 +81,10 @@ export default {
       }
     },
     filter(dates){
-      let date_du = new Date(dates.du).toLocaleDateString('fr-CA');
-      let date_au = new Date(dates.au).toLocaleDateString('fr-CA');
+      let date_du = new Date(dates.du).toISOString();
+      let date_au = new Date(dates.au).toISOString();
       
-      axios.get(`${this.$store.state.host}/statistic/service/${date_du}/${date_au}/`, this.headers)
+      axios.get(`${this.$store.state.host}/commande/stats/?date__range=${date_du},${date_au}`, this.headers)
       .then((response) => {
         this.services = response.data;
         this.raw_services = response.data;

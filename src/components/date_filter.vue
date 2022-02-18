@@ -3,9 +3,9 @@
     <button @click="triggered=!triggered">Date</button>
     <form v-if="triggered">
     	<label>Du:</label>
-    	<input type="date" name="date_du" v-model="date.du"/>
+    	<input type="datetime-local" name="date_du" v-model="date.du"/>
     	<label>Au:</label>
-    	<input type="date" name="date_au" v-model="date.au"/>
+    	<input type="datetime-local" name="date_au" v-model="date.au"/>
     	<input type="submit" value="search"
     		@click.prevent.stop="performSearch"
     		style="border:1px solid black" 
@@ -39,7 +39,7 @@ form{
 	padding: 5px 10px;
 	box-shadow: 5px 5px 5px black;
 }
-input[type=date]{
+input[type=datetime-local]{
 	display: block;
 	font-size: 1.3em;
 	font-weight: bold;

@@ -9,11 +9,11 @@
 				<router-link to="/stock">Stock</router-link>
 			</li>
 			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"@mouseleave="e => hideSubmenu(e)">
-				<router-link to="">Statistiques</router-link>
+				<router-link to="">Autres</router-link>
 				<div class="submenu">
-					<router-link to="stat_menu">Menu</router-link>
-					<router-link to="stat_service">Service</router-link>
-					<router-link to="">Achats</router-link>
+					<router-link to="stat_menu">Stats Recettes</router-link>
+					<router-link to="stat_service">Stats Service</router-link>
+					<router-link to="">Administration</router-link>
 				</div>
 			</li>
 		</ul>
