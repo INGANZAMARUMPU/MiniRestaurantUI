@@ -43,7 +43,7 @@ input[type=datetime-local]{
 	display: block;
 	font-size: 1.3em;
 	font-weight: bold;
-	width: 200px;
+	width: 215px;
 }
 label{
 	font-size: .8em;

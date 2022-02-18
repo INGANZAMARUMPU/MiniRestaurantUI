@@ -33,7 +33,7 @@ export default {
 	methods: {
 		getIcon(recette){
 			if (recette.image == null) {
-				return "/img/recette.png";
+				return "/static/logo.png";
 			}
 			return recette.image;
 		},

@@ -13,7 +13,7 @@
 				<div class="submenu">
 					<router-link to="stat_menu">Stats Recettes</router-link>
 					<router-link to="stat_service">Stats Service</router-link>
-					<router-link to="">Administration</router-link>
+					<a href="/admin/" target="_blank">Administration</a>
 				</div>
 			</li>
 		</ul>

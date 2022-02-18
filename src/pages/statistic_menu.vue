@@ -83,8 +83,8 @@ export default {
       .then((response) => {
         this.menus = response.data;
         this.raw_menus = response.data;
-        this.date_du = date_du.toLocaleDateString('fr-CA');
-        this.date_au = date_au.toLocaleDateString('fr-CA');
+        this.date_du = dates_du;
+        this.date_au = dates_du;
       }).catch((error) => {
         console.error(error);
       });

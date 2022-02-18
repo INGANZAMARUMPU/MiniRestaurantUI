@@ -2,7 +2,7 @@
   <div class="parent nonprintable" @click="popover_opened=false">
     <div class="top">
       <SearchBar @changed="search"/>
-      <DateFilter/>
+      <DateFilter @changed="filter"/>
     </div>
       <div class="scrollable">
       <table>
@@ -116,18 +116,7 @@ export default {
     if (result.length > 0){
       this.commandes = result;
     } else {
-      let headers = {
-        headers: {
-          "Authorization": "Bearer " + this.$store.state.user.access
-        }
-      }
-      axios.get(this.$store.state.host+'/commande/', headers)
-      .then((response) => {
-        this.$store.state.commandes = response.data;
-        this.commandes = response.data;
-      }).catch((error) => {
-        console.error(error);
-      });
+      this.fetchData()
     }
   },
   methods:{
@@ -158,6 +147,32 @@ export default {
     showPay(commande){
       this.active_commande = commande;
       this.pay_opened = true;
+    },
+    filter(dates){
+      let date_du = new Date(dates.du).toISOString();
+      let date_au = new Date(dates.au).toISOString();
+      
+      axios.get(`${this.host}/commande/?date__range=${date_du},${date_au}`, this.headers)
+      .then((response) => {
+        this.$store.state.commandes = response.data;
+        this.commandes = response.data;
+        this.date_du = date_du
+        this.date_au = date_au
+      }).catch((error) => {
+        console.error(error);
+      });
+    },
+    fetchData(){
+      let date = new Date()
+      date.setDate(date.getDate()-1)
+      let date_du = date.toISOString();
+      axios.get(this.$store.state.host+`/commande/?date__gte=${date_du}`, this.headers)
+      .then((response) => {
+        this.$store.state.commandes = response.data;
+        this.commandes = response.data;
+      }).catch((error) => {
+        console.error(error);
+      });
     }
   }
 };

@@ -8,7 +8,7 @@
 			<form method="post" v-if="produit">
 				<div class="field">
 					<label for="id_quantite">Quantite:</label>
-					<input type="number" v-model="quantite" placeholder="quantite" id="id_quantite">
+					<input type="number" v-model="quantite" placeholder="quantite" id="id_quantite" autocomplete="off">
 				</div>
 				<div class="field">
 					<label for="id_motif">Motif:</label>
