@@ -12,12 +12,12 @@
 						<span v-if="achat.quantite">({{achat.quantite*produit.rapport}} {{ produit.unite_sortant }})</span>
 					</label>
 					<input type="text" placeholder="quantite" id="id_quantite"
-						v-model="achat.quantite">
+						v-model="achat.quantite" autocomplete="off">
 				</div>
 				<div class="field">
 					<label for="id_prix">Prix d'achat:</label>
 					<input type="number" placeholder="Prix d'achat" id="id_prix"
-						v-model="achat.prix">
+						v-model="achat.prix" autocomplete="off">
 				</div>
 				<div class="submit">
 					<div class="logs">{{logs}}</div>
@@ -44,9 +44,12 @@ export default {
 			this.$emit("close")
 		},
 		acheter(){
-			this.achat.produit = this.produit.id
-			this.achat.quantite = eval(this.achat.quantite*this.produit.rapport);
-			axios.post(this.$store.state.host+"/achat/",this.achat, this.headers)
+			let data = {
+				produit: this.produit.id,
+				quantite: eval(this.achat.quantite)*this.produit.rapport,
+				prix: eval(this.achat.prix)
+			}
+			axios.post(this.$store.state.host+"/achat/", data, this.headers)
 			.then((response) => {
 				this.produit.quantite += response.data.quantite;
 				this.close()

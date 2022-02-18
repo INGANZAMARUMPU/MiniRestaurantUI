@@ -43,13 +43,6 @@ export default {
 		}
 	},
 	computed:{
-		headers(){
-			return {
-				headers: {
-					"Authorization": "Bearer " + this.$store.state.user.access
-				}
-			}
-		},
 		host(){
 			return this.$store.state.host
 		},
@@ -69,7 +62,7 @@ export default {
 		create(){
 			let data = {
 				"nom":this.nom, "unite":this.unite,
-				"unite_sortant":this.unitethis.sortant,
+				"unite_sortant":this.sortant,
 				"rapport":this.rapport,
 			};
 			axios.post(this.host+"/produit/", data, this.headers)
