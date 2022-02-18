@@ -44,7 +44,6 @@ export default {
       raw_services : [],
       date_du : new Date().toLocaleDateString('fr-CA'),
       date_au : new Date().toLocaleDateString('fr-CA'),
-      headers : null
     }
   },
   mounted(){
@@ -53,13 +52,7 @@ export default {
       this.services = result;
       this.raw_services = result;
     } else {
-      let headers = {
-        headers: {
-          "Authorization": "Bearer " + this.$store.state.user.access
-        }
-      };
-      this.headers = headers;
-      axios.get(this.$store.state.host+'/statistic/service/', headers)
+      axios.get(this.$store.state.host+'/statistic/service/', this.headers)
       .then((response) => {
         this.$store.state.stats.service = response.data;
         this.services = response.data;

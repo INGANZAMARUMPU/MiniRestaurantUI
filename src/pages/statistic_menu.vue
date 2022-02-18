@@ -48,7 +48,6 @@ export default {
       raw_menus : [],
       date_du : new Date().toLocaleDateString('fr-CA'),
       date_au : new Date().toLocaleDateString('fr-CA'),
-      headers : null
     }
   },
   mounted(){
@@ -57,20 +56,7 @@ export default {
       this.menus = result;
       this.raw_menus = result;
     } else {
-      let headers = {
-        headers: {
-          "Authorization": "Bearer " + this.$store.state.user.access
-        }
-      };
-      this.headers = headers;
-      axios.get(this.$store.state.host+'/statistic/menu/', headers)
-      .then((response) => {
-        this.$store.state.stats.menu = response.data;
-        this.menus = response.data;
-        this.raw_menus = response.data;
-      }).catch((error) => {
-        console.error(error);
-      });
+      this.fetchData()
     }
   },
   methods:{
@@ -99,6 +85,16 @@ export default {
         this.date_au = date_au;
       }).catch((error) => {
         console.error(error);
+      });
+    },
+    fetchData(){
+      axios.get(this.$store.state.host+'/statistic/menu/', this.headers)
+      .then((response) => {
+        this.$store.state.stats.menu = response.data;
+        this.menus = response.data;
+        this.raw_menus = response.data;
+      }).catch((error) => {
+        this.displayErrorOrRefreshToken(error, fetchData)
       });
     }
   }
