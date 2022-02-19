@@ -2,11 +2,11 @@
 	<div class="parent" :data-id='recette.id'
 		:class="{disabled:!recette.is_active}">
 		<div class="img food-img">
-			<img :src="getIcon(recette)" height="112px" style="margin:5px" />
+			<img :src="getIcon(recette)"/>
 		</div>
 		<div class="title">
-			{{ recette.nom }} {{ money(recette.prix) }}
-			Fbu
+			{{ recette.nom }}
+			<span class="prix">{{ money(recette.prix) }}FBu</span>
 		</div>
 		<div class="buttons">
 			<button class="left-button bg-blue recette_moins" @click="decreaseQtt">-</button>
@@ -53,26 +53,40 @@ export default {
 	color: white; 
 }
 .parent{
-    background: #0088aa;
+	border: 1px solid #08a;
+	background-color: lightgray;
     border-radius: 5px;
-    padding: 3px;
     margin: 3px;
     width: 200px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 }
 .title{
-	font-size: 1.1em;
-	padding-bottom: 5px;
+	font-size: 1em;
+	padding: 5px 0;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
-	max-height: 2.2em;
+	z-index: 1;
+	background-color: #0005;
+	margin: 0;
+	height: 100%;
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+}
+.prix{
+	background-color: #08a;
+	color: white;
+	border-radius: 5px;
+	white-space: nowrap;
+	padding: 0 5px;
 }
 .buttons{
 	display: flex;
 	margin-top: auto;
-	border-top: 1px solid lightgray;
+	border-top: 1px solid #08A;
+	z-index: 1;
 }
 button{
 	width: 35%;
@@ -80,6 +94,9 @@ button{
 	margin: 0;
 	text-align: center;
 	border-radius: 0;
+	background-color: #08A;
+	font-weight: 700;
+	color: white;
 }
 label{
 	flex-grow: 1;
@@ -91,5 +108,13 @@ label{
 }
 button:hover{
 	background-color: #007799;
+}
+.img{
+	height: 100px;
+	position: relative;
+	z-index: 0;
+}
+img{
+	width: 100%;
 }
 </style>
