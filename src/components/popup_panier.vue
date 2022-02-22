@@ -89,7 +89,10 @@ export default {
 						produit = this.$store.state.stocks.find(
 							p => p.id == x.recette.produit
 						)
-						produit.quantite -= x.quantite;
+						if(!!produit){
+							produit.quantite -= x.quantite;
+						}
+						produit = null
 					}
 				})
 				this.$store.state.cart.content=[];
