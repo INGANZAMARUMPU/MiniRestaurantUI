@@ -27,7 +27,10 @@
               @click="column='date'">
               Date
             </th>
-            <th><button onclick="toggleTableSize(event)">toggle display</button></th>
+            <th>
+              <input id="dis_payed" type="checkbox" v-model="display_payed">
+              <label for="dis_payed" style="margin-left: 5px;">voir les payées</label>
+            </th>
           </tr>
         </thead>
         <tbody id="commandes">
@@ -85,10 +88,11 @@ export default {
   },
   data(){
     return{
-      commandes : [],
       details_opened:false,
       pay_opened:false, column:"",
       active_commande :null,
+      display_payed:false,
+      temp_commands: []
     }
   },
   computed:{
@@ -101,21 +105,26 @@ export default {
         tots.reste += commande.a_payer - commande.payee;
       }
       return tots;
+    },
+    commandes:{
+      get(){
+        if(this.display_payed){
+          return this.temp_commands;
+        }
+        return this.temp_commands.filter(x => x.payee < x.a_payer);
+      },
+      set(new_val){
+        this.temp_commands = new_val
+      }
     }
   },
   watch:{
     active_commande(new_val){
       this.$store.state.commande = new_val
-    },
-    "$store.state.commandes"(new_val){
-      this.commandes = new_val
     }
   },
   mounted(){
-    let result = this.$store.state.commandes;
-    if (result.length > 0){
-      this.commandes = result;
-    } else {
+    if (this.$store.state.commandes.length == 0){
       this.fetchData()
     }
   },
