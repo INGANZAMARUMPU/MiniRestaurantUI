@@ -55,6 +55,9 @@ export default {
 			window.print()
 		},
 		supprimer(){
+			if(!confirm("Voulez-vous vraiment supprimer?")){
+				return
+			}
 			axios.delete(this.host+`/commande/${this.commande.id}/`, this.headers)
 			.then((response) => {
 				let index = -1

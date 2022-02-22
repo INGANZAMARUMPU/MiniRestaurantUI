@@ -81,7 +81,7 @@ export default {
 				}
 			}
 			let form_data = new FormData();
-			form_data.append('avatar', this.avatar);
+			if(!!this.avatar) form_data.append('avatar', this.avatar);
 			form_data.append('firstname', this.new_serveur.firstname);
 			form_data.append('lastname', this.new_serveur.lastname);
 			form_data.append('tel', this.new_serveur.tel);

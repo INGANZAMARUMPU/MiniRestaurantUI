@@ -39,7 +39,10 @@
         </tbody>
     </table>
     <div style="margin:10px" v-if="!!commande">
-        Caissier: {{ commande.serveur||"" }}
+        Serveur: {{ commande.serveur||"" }}
+    </div>
+    <div style="margin:10px" v-if="!!commande">
+        Caissier: {{ commande.user||"" }}
     </div>
     <center>
     	<strong>Murakoze, Merci, Thank you!</strong>

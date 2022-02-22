@@ -76,8 +76,8 @@ export default {
 	-webkit-backdrop-filter: blur(2px);
 }
 .prix{
-	background-color: #08a;
-	color: white;
+	background-color: #fbac;
+	color: #444;
 	border-radius: 5px;
 	white-space: nowrap;
 	padding: 0 5px;
