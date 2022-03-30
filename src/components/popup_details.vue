@@ -100,8 +100,15 @@ export default {
 				console.error(error);
 			});
 		},
-		enlever(recette){
-			
+		enlever(details){
+			axios.get(this.host+`/commande/${this.commande.id}/enlever/${details.id}/`, this.headers)
+			.then((response) => {
+				for(let key of Object.keys(this.commande)){
+					this.commande[key] = response.data[key]
+				}
+			}).catch((error) => {
+				console.error(error);
+			});
 		},
 		ajouter(){
 			let data = {
