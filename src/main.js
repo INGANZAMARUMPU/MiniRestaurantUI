@@ -41,6 +41,7 @@ Vue.mixin({
       return str.replace( /(<([^>]+)>)/ig, '');
     },
     money(x) {
+      if(!x) return 0
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
     datetime(x) {

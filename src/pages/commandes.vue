@@ -92,7 +92,7 @@ export default {
       pay_opened:false, column:"",
       active_commande :null,
       display_payed:false,
-      temp_commands: []
+      temp_commands: this.$store.state.commandes
     }
   },
   computed:{

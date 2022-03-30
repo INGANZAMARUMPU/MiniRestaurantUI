@@ -10,14 +10,35 @@
 						<th>price</th>
 						<th>quantity</th>
 						<th>total</th>
+						<th>option</th>
 					</tr>
 				</thead>
 				<tbody class=".popup-content">
 					<tr v-for="details in commande.details">
 						<td>{{details.nom}}</td>
-						<td>{{details.prix}}</td>
+						<td class="money">{{money(details.prix)}}</td>
 						<td>x {{details.quantite}}</td>
-						<td>{{details.somme}}</td>
+						<td class="money">{{money(details.somme)}}</td>
+						<td>
+							<button style="background-color: darkred;" @click="enlever(details)">
+								enlever
+							</button>
+						</td>
+					</tr>
+					<tr v-for="details in commande.details">
+						<td>
+							<select v-model="added_menu">
+								<option v-for="menu in $store.state.recettes" :value="menu">
+									{{ menu.nom }}
+								</option>
+							</select>
+						</td>
+						<td class="money">{{ money(added_menu.prix)}}</td>
+						<td>x<input type="number" v-model="added_qtt"></td>
+						<td class="money">{{ money(added_menu.prix)}}</td>
+						<td>
+							<button @click="ajouter">ajouter</button>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>
@@ -25,7 +46,7 @@
 						<td>total</td>
 						<td></td>
 						<td></td>
-						<td>{{ commande.a_payer }}</td>
+						<td class="money">{{ money(commande.a_payer) }}</td>
 					</tr>
 				</tfoot>
 			</table>
@@ -46,6 +67,11 @@ export default {
 	props: {
 		visible:{ type:Boolean, default:false},
 		commande:{ type:Object, default:null}
+	},
+	data(){
+		return {
+			added_menu:{}, added_qtt:1
+		}
 	},
 	methods: {
 		close(){
@@ -73,9 +99,33 @@ export default {
 			}).catch((error) => {
 				console.error(error);
 			});
+		},
+		enlever(recette){
+			
+		},
+		ajouter(){
+
+		},
+		fetchData(){
+			axios.get(this.host+'/recette/', this.headers)
+			.then((response) => {
+				this.$store.state.recettes = response.data;
+			}).catch((error) => {
+				console.error(error);
+			});
+		}
+	},
+	mounted(){
+		if(this.$store.state.recettes.length == 0){
+			this.fetchData()
 		}
 	}
 };
 </script>
 <style>
+input[type=number]{
+	display: inline-block;
+	width: 50px;
+	margin-left: 5px;
+}
 </style>

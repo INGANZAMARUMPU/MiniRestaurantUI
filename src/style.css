@@ -166,6 +166,9 @@ table th, table td {
 .printable{
 	display: none;
 }
+.money{
+	white-space: nowrap;
+}
 @media screen and (max-width: 650px){
 	body{
 		overflow: auto;

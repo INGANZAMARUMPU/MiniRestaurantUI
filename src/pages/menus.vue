@@ -92,7 +92,9 @@ export default {
     }
   },
   mounted(){
-    this.fetchData()
+    if(this.$store.state.recettes.length == 0){
+      this.fetchData()
+    }
   }
 };
 </script>
