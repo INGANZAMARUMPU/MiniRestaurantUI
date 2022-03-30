@@ -25,7 +25,7 @@
 							</button>
 						</td>
 					</tr>
-					<tr v-for="details in commande.details">
+					<tr>
 						<td>
 							<select v-model="added_menu">
 								<option v-for="menu in $store.state.recettes" :value="menu">
@@ -104,7 +104,20 @@ export default {
 			
 		},
 		ajouter(){
-
+			let data = {
+				recette_id: this.added_menu.id,
+				quantite: this.added_qtt
+			}
+			axios.post(this.host+`/commande/${this.commande.id}/ajouter/`, data, this.headers)
+			.then((response) => {
+				for(let key of Object.keys(this.commande)){
+					this.commande[key] = response.data[key]
+				}
+				this.added_menu = {}
+				this.added_qtt = 0
+			}).catch((error) => {
+				console.error(error);
+			});
 		},
 		fetchData(){
 			axios.get(this.host+'/recette/', this.headers)
