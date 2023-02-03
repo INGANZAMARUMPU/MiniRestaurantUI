@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Tables from "../pages/tables"
 import Serveurs from "../pages/serveurs"
 import Menus from "../pages/menus"
@@ -7,8 +6,6 @@ import Commandes from "../pages/commandes"
 import Stock from "../pages/stock"
 import StatMenus from "../pages/statistic_menu"
 import StatServices from "../pages/statistic_service"
-
-Vue.use(VueRouter)
 
 const routes = [
   {path: "", component: Tables, name:"tables"},
@@ -20,9 +17,8 @@ const routes = [
   {path: "/stat_service/", component: StatServices, name:"stat_service"},
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHashHistory(),
   routes
 })
 
