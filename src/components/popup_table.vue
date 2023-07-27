@@ -8,7 +8,7 @@
 			<form method="post">
 				<div class="field">
 					<label for="id_nom">Nom ou Place:</label>
-					<input type="text" placeholder="nom" id="id_nom"v-model="nom">
+					<input type="text" placeholder="nom" id="id_nom" v-model="nom">
 				</div>
 				<div class="field">
 					<label for="id_number">Numéro:</label>

@@ -4,11 +4,13 @@
 			<li class="toggle-submenu">
 				<router-link :to="{name:'tables'}">Tables</router-link>
 			</li>
-			<li><router-link to="/commandes">Commandes</router-link>
+			<li>
+				<router-link to="/commandes">Commandes</router-link>
+			</li>
 			<li class="toggle-submenu">
 				<router-link to="/stock">Stock</router-link>
 			</li>
-			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)"@mouseleave="e => hideSubmenu(e)">
+			<li v-if="user.is_admin" @mouseenter="e => showSubmenu(e)" @mouseleave="e => hideSubmenu(e)">
 				<router-link to="">Autres</router-link>
 				<div class="submenu">
 					<router-link to="stat_menu">Stats Recettes</router-link>

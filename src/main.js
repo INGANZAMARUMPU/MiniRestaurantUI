@@ -5,11 +5,9 @@ import store from './store'
 import axios from 'axios'
 import mixins from './mixins'
 
-Vue.config.productionTip = false
 window.axios = axios
 
 createApp(App)
-  .component('fa', FontAwesomeIcon)
   .mixin(mixins)
   .use(store)
   .use(router)

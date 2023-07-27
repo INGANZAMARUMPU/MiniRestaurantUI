@@ -51,7 +51,7 @@
 				</tfoot>
 			</table>
 			<div class="btns-valider">
-				<button style="margin-right:3px"vid="valider-panier" @click="supprimer">
+				<button style="margin-right:3px" vid="valider-panier" @click="supprimer">
 					supprimer
 				</button>
 				<button @click="imprimer">
